@@ -1,6 +1,6 @@
 # Go Bindings for ElevenLabs API
 
-Go code for calling the ElevenLabs API. Generated using the Eleven Labs OpenAPI specification and the [deepmap/oapi-codengen](https://github.com/deepmap/oapi-codegen) project. 
+Go bindings for calling the ElevenLabs API. All bindings are generated using [Eleven Labs OpenAPI specification](https://api.elevenlabs.io/openapi.json) and [deepmap/oapi-codengen](https://github.com/deepmap/oapi-codegen). 
 
 ## Running the example
 
@@ -16,16 +16,10 @@ Run the example
 go run example/example.go -file output.mp3 -text 'hello, world!'
 ```
 
-## Updating and regenerating bindings
+## Update to latest OpenAPI Specs and generate new bindings
 
-Update `openapi.json` to the latest OpenAPI specification from ElevenLabs:
+If ElevenLabs updates their API, you can update all bindings using
 
 ```
 make update
-```
-
-Regenerate Go Bindings from `openapi.json`:
-
-```
-make generate
 ```
