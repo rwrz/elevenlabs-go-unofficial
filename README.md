@@ -1,8 +1,8 @@
 # Go Bindings for ElevenLabs API
 
-Go bindings for calling the ElevenLabs API. All bindings are generated using [Eleven Labs OpenAPI specification](https://api.elevenlabs.io/openapi.json) and [deepmap/oapi-codengen](https://github.com/deepmap/oapi-codegen). 
+Go bindings for the ElevenLabs API. All bindings generated using the [Eleven Labs OpenAPI spec](https://api.elevenlabs.io/openapi.json) and [deepmap/oapi-codegen](https://github.com/deepmap/oapi-codegen). 
 
-## Running the example
+## Run the example
 
 Set your API key
 
@@ -16,7 +16,7 @@ Run the example
 go run example/example.go -file output.mp3 -text 'hello, world!'
 ```
 
-## Update to latest OpenAPI Specs and generate new bindings
+## Update OpenAPI spec and generate new bindings
 
 If ElevenLabs updates their API, you can update all bindings using
 
