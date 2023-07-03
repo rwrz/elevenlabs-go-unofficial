@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"flag"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -21,6 +22,15 @@ func init() {
 }
 
 func main() {
+	filePtr := flag.String("file", "", "the mp3 file to save")
+	textPtr := flag.String("text", "", "the text for the API call")
+	flag.Parse()
+
+	if *filePtr == "" || *textPtr == "" {
+		flag.PrintDefaults()
+		return
+	}
+
 	cl, err := xi.NewClientWithResponses("https://api.elevenlabs.io")
 	if err != nil {
 		panic(fmt.Errorf("error creating client %w", err))
@@ -40,9 +50,9 @@ func main() {
 	ttsResp, err := cl.TextToSpeechV1TextToSpeechVoiceIdStreamPostWithResponse(context.Background(), voiceId, &xi.TextToSpeechV1TextToSpeechVoiceIdStreamPostParams{
 		XiApiKey: key,
 	}, xi.BodyTextToSpeechV1TextToSpeechVoiceIdStreamPost{
-		Text: "In Go, you can pass a pointer to a value as a function argument directly without declaring a separate variable. Here's an example of how you can pass a pointer to the integer value 3 as a function parameter:",
+		Text: *textPtr,
 	})
-	err = SaveMPEGToFile(ttsResp, "tts.mp3")
+	err = SaveMPEGToFile(ttsResp, *filePtr)
 	if err != nil {
 		panic(fmt.Errorf("error saving mp3 %w", err))
 	}

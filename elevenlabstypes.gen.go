@@ -60,6 +60,14 @@ const (
 	SubscriptionResponseModelStatusUnpaid            SubscriptionResponseModelStatus = "unpaid"
 )
 
+// Defines values for VoiceSharingResponseModelStatus.
+const (
+	Copied         VoiceSharingResponseModelStatus = "copied"
+	CopiedDisabled VoiceSharingResponseModelStatus = "copied_disabled"
+	Disabled       VoiceSharingResponseModelStatus = "disabled"
+	Enabled        VoiceSharingResponseModelStatus = "enabled"
+)
+
 // AddVoiceResponseModel defines model for AddVoiceResponseModel.
 type AddVoiceResponseModel struct {
 	VoiceId string `json:"voice_id"`
@@ -164,15 +172,17 @@ type FeedbackResponseModel struct {
 
 // FineTuningResponseModel defines model for FineTuningResponseModel.
 type FineTuningResponseModel struct {
-	FineTuningRequested       bool                                   `json:"fine_tuning_requested"`
-	FinetuningState           FineTuningResponseModelFinetuningState `json:"finetuning_state"`
-	IsAllowedToFineTune       bool                                   `json:"is_allowed_to_fine_tune"`
-	Language                  string                                 `json:"language"`
-	ModelId                   string                                 `json:"model_id"`
-	SliceIds                  []string                               `json:"slice_ids"`
-	VerificationAttempts      []VerificationAttemptResponseModel     `json:"verification_attempts"`
-	VerificationAttemptsCount int                                    `json:"verification_attempts_count"`
-	VerificationFailures      []string                               `json:"verification_failures"`
+	FineTuningRequested         bool                                   `json:"fine_tuning_requested"`
+	FinetuningState             FineTuningResponseModelFinetuningState `json:"finetuning_state"`
+	IsAllowedToFineTune         bool                                   `json:"is_allowed_to_fine_tune"`
+	Language                    string                                 `json:"language"`
+	ManualVerification          ManualVerificationResponseModel        `json:"manual_verification"`
+	ManualVerificationRequested bool                                   `json:"manual_verification_requested"`
+	ModelId                     string                                 `json:"model_id"`
+	SliceIds                    []string                               `json:"slice_ids"`
+	VerificationAttempts        []VerificationAttemptResponseModel     `json:"verification_attempts"`
+	VerificationAttemptsCount   int                                    `json:"verification_attempts_count"`
+	VerificationFailures        []string                               `json:"verification_failures"`
 }
 
 // FineTuningResponseModelFinetuningState defines model for FineTuningResponseModel.FinetuningState.
@@ -226,16 +236,38 @@ type LanguageResponseModel struct {
 	Name       string `json:"name"`
 }
 
+// ManualVerificationFileResponseModel defines model for ManualVerificationFileResponseModel.
+type ManualVerificationFileResponseModel struct {
+	FileId         string `json:"file_id"`
+	FileName       string `json:"file_name"`
+	MimeType       string `json:"mime_type"`
+	SizeBytes      int    `json:"size_bytes"`
+	UploadDateUnix int    `json:"upload_date_unix"`
+}
+
+// ManualVerificationResponseModel defines model for ManualVerificationResponseModel.
+type ManualVerificationResponseModel struct {
+	ExtraText       string                                `json:"extra_text"`
+	Files           []ManualVerificationFileResponseModel `json:"files"`
+	RequestTimeUnix int                                   `json:"request_time_unix"`
+}
+
 // ModelResponseModel defines model for ModelResponseModel.
 type ModelResponseModel struct {
-	CanBeFinetuned       bool                    `json:"can_be_finetuned"`
-	CanDoTextToSpeech    bool                    `json:"can_do_text_to_speech"`
-	CanDoVoiceConversion bool                    `json:"can_do_voice_conversion"`
-	Description          string                  `json:"description"`
-	Languages            []LanguageResponseModel `json:"languages"`
-	ModelId              string                  `json:"model_id"`
-	Name                 string                  `json:"name"`
-	TokenCostFactor      float32                 `json:"token_cost_factor"`
+	CanBeFinetuned                     bool                    `json:"can_be_finetuned"`
+	CanDoTextToSpeech                  bool                    `json:"can_do_text_to_speech"`
+	CanDoVoiceConversion               bool                    `json:"can_do_voice_conversion"`
+	CanUseSpeakerBoost                 bool                    `json:"can_use_speaker_boost"`
+	CanUseStyle                        bool                    `json:"can_use_style"`
+	Description                        string                  `json:"description"`
+	Languages                          []LanguageResponseModel `json:"languages"`
+	MaxCharactersRequestFreeUser       int                     `json:"max_characters_request_free_user"`
+	MaxCharactersRequestSubscribedUser int                     `json:"max_characters_request_subscribed_user"`
+	ModelId                            string                  `json:"model_id"`
+	Name                               string                  `json:"name"`
+	RequiresAlphaAccess                bool                    `json:"requires_alpha_access"`
+	ServesProVoices                    bool                    `json:"serves_pro_voices"`
+	TokenCostFactor                    float32                 `json:"token_cost_factor"`
 }
 
 // RecordingResponseModel defines model for RecordingResponseModel.
@@ -332,19 +364,26 @@ type VoiceResponseModel struct {
 
 // VoiceSettingsResponseModel defines model for VoiceSettingsResponseModel.
 type VoiceSettingsResponseModel struct {
-	SimilarityBoost float32 `json:"similarity_boost"`
-	Stability       float32 `json:"stability"`
+	SimilarityBoost float32  `json:"similarity_boost"`
+	Stability       float32  `json:"stability"`
+	Style           *float32 `json:"style,omitempty"`
+	UseSpeakerBoost *bool    `json:"use_speaker_boost,omitempty"`
 }
 
 // VoiceSharingResponseModel defines model for VoiceSharingResponseModel.
 type VoiceSharingResponseModel struct {
-	ClonedByCount       int    `json:"cloned_by_count"`
-	HistoryItemSampleId string `json:"history_item_sample_id"`
-	LikedByCount        int    `json:"liked_by_count"`
-	OriginalVoiceId     string `json:"original_voice_id"`
-	PublicOwnerId       string `json:"public_owner_id"`
-	Status              string `json:"status"`
+	ClonedByCount       int                             `json:"cloned_by_count"`
+	EnabledInLibrary    bool                            `json:"enabled_in_library"`
+	HistoryItemSampleId string                          `json:"history_item_sample_id"`
+	LikedByCount        int                             `json:"liked_by_count"`
+	OriginalVoiceId     string                          `json:"original_voice_id"`
+	PublicOwnerId       string                          `json:"public_owner_id"`
+	Status              VoiceSharingResponseModelStatus `json:"status"`
+	WhitelistedEmails   []string                        `json:"whitelisted_emails"`
 }
+
+// VoiceSharingResponseModelStatus defines model for VoiceSharingResponseModel.Status.
+type VoiceSharingResponseModelStatus string
 
 // GetGeneratedItemsV1HistoryGetParams defines parameters for GetGeneratedItemsV1HistoryGet.
 type GetGeneratedItemsV1HistoryGetParams struct {
