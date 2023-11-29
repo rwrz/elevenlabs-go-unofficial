@@ -89,6 +89,12 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 
 // The interface specification for the client above.
 type ClientInterface interface {
+	// RedirectToMintlifyDocsGet request
+	RedirectToMintlifyDocsGet(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreatesAudioNativeEnabledProjectV1AudioNativePost request with any body
+	CreatesAudioNativeEnabledProjectV1AudioNativePostWithBody(ctx context.Context, params *CreatesAudioNativeEnabledProjectV1AudioNativePostParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// GetGeneratedItemsV1HistoryGet request
 	GetGeneratedItemsV1HistoryGet(ctx context.Context, params *GetGeneratedItemsV1HistoryGetParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -108,6 +114,56 @@ type ClientInterface interface {
 
 	// GetModelsV1ModelsGet request
 	GetModelsV1ModelsGet(ctx context.Context, params *GetModelsV1ModelsGetParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetProjectsV1ProjectsGet request
+	GetProjectsV1ProjectsGet(ctx context.Context, params *GetProjectsV1ProjectsGetParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// AddProjectV1ProjectsAddPost request with any body
+	AddProjectV1ProjectsAddPostWithBody(ctx context.Context, params *AddProjectV1ProjectsAddPostParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteProjectV1ProjectsProjectIdDelete request
+	DeleteProjectV1ProjectsProjectIdDelete(ctx context.Context, projectId string, params *DeleteProjectV1ProjectsProjectIdDeleteParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetProjectByIDV1ProjectsProjectIdGet request
+	GetProjectByIDV1ProjectsProjectIdGet(ctx context.Context, projectId string, params *GetProjectByIDV1ProjectsProjectIdGetParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetChaptersV1ProjectsProjectIdChaptersGet request
+	GetChaptersV1ProjectsProjectIdChaptersGet(ctx context.Context, projectId string, params *GetChaptersV1ProjectsProjectIdChaptersGetParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteChapterV1ProjectsProjectIdChaptersChapterIdDelete request
+	DeleteChapterV1ProjectsProjectIdChaptersChapterIdDelete(ctx context.Context, projectId string, chapterId string, params *DeleteChapterV1ProjectsProjectIdChaptersChapterIdDeleteParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetChapterByIDV1ProjectsProjectIdChaptersChapterIdGet request
+	GetChapterByIDV1ProjectsProjectIdChaptersChapterIdGet(ctx context.Context, projectId string, chapterId string, params *GetChapterByIDV1ProjectsProjectIdChaptersChapterIdGetParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ConvertChapterV1ProjectsProjectIdChaptersChapterIdConvertPost request
+	ConvertChapterV1ProjectsProjectIdChaptersChapterIdConvertPost(ctx context.Context, projectId string, chapterId string, params *ConvertChapterV1ProjectsProjectIdChaptersChapterIdConvertPostParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetChapterSnapshotsV1ProjectsProjectIdChaptersChapterIdSnapshotsGet request
+	GetChapterSnapshotsV1ProjectsProjectIdChaptersChapterIdSnapshotsGet(ctx context.Context, projectId string, chapterId string, params *GetChapterSnapshotsV1ProjectsProjectIdChaptersChapterIdSnapshotsGetParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// StreamChapterAudioV1ProjectsProjectIdChaptersChapterIdSnapshotsChapterSnapshotIdStreamPost request
+	StreamChapterAudioV1ProjectsProjectIdChaptersChapterIdSnapshotsChapterSnapshotIdStreamPost(ctx context.Context, projectId string, chapterId string, chapterSnapshotId string, params *StreamChapterAudioV1ProjectsProjectIdChaptersChapterIdSnapshotsChapterSnapshotIdStreamPostParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ConvertProjectV1ProjectsProjectIdConvertPost request
+	ConvertProjectV1ProjectsProjectIdConvertPost(ctx context.Context, projectId string, params *ConvertProjectV1ProjectsProjectIdConvertPostParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetProjectSnapshotsV1ProjectsProjectIdSnapshotsGet request
+	GetProjectSnapshotsV1ProjectsProjectIdSnapshotsGet(ctx context.Context, projectId string, params *GetProjectSnapshotsV1ProjectsProjectIdSnapshotsGetParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// StreamProjectAudioV1ProjectsProjectIdSnapshotsProjectSnapshotIdStreamPost request
+	StreamProjectAudioV1ProjectsProjectIdSnapshotsProjectSnapshotIdStreamPost(ctx context.Context, projectId string, projectSnapshotId string, params *StreamProjectAudioV1ProjectsProjectIdSnapshotsProjectSnapshotIdStreamPostParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPost request with any body
+	UpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPostWithBody(ctx context.Context, projectId string, params *UpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPostParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPost(ctx context.Context, projectId string, params *UpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPostParams, body UpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPostJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// AddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePost request with any body
+	AddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePostWithBody(ctx context.Context, params *AddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePostParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetMetadataForAPronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdGet request
+	GetMetadataForAPronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdGet(ctx context.Context, pronunciationDictionaryId string, params *GetMetadataForAPronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdGetParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// TextToSpeechV1TextToSpeechVoiceIdPost request with any body
 	TextToSpeechV1TextToSpeechVoiceIdPostWithBody(ctx context.Context, voiceId string, params *TextToSpeechV1TextToSpeechVoiceIdPostParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -156,6 +212,30 @@ type ClientInterface interface {
 	EditVoiceSettingsV1VoicesVoiceIdSettingsEditPostWithBody(ctx context.Context, voiceId string, params *EditVoiceSettingsV1VoicesVoiceIdSettingsEditPostParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	EditVoiceSettingsV1VoicesVoiceIdSettingsEditPost(ctx context.Context, voiceId string, params *EditVoiceSettingsV1VoicesVoiceIdSettingsEditPostParams, body EditVoiceSettingsV1VoicesVoiceIdSettingsEditPostJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+}
+
+func (c *Client) RedirectToMintlifyDocsGet(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewRedirectToMintlifyDocsGetRequest(c.Server)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreatesAudioNativeEnabledProjectV1AudioNativePostWithBody(ctx context.Context, params *CreatesAudioNativeEnabledProjectV1AudioNativePostParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreatesAudioNativeEnabledProjectV1AudioNativePostRequestWithBody(c.Server, params, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
 }
 
 func (c *Client) GetGeneratedItemsV1HistoryGet(ctx context.Context, params *GetGeneratedItemsV1HistoryGetParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
@@ -232,6 +312,210 @@ func (c *Client) GetAudioFromHistoryItemV1HistoryHistoryItemIdAudioGet(ctx conte
 
 func (c *Client) GetModelsV1ModelsGet(ctx context.Context, params *GetModelsV1ModelsGetParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetModelsV1ModelsGetRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetProjectsV1ProjectsGet(ctx context.Context, params *GetProjectsV1ProjectsGetParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetProjectsV1ProjectsGetRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) AddProjectV1ProjectsAddPostWithBody(ctx context.Context, params *AddProjectV1ProjectsAddPostParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAddProjectV1ProjectsAddPostRequestWithBody(c.Server, params, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteProjectV1ProjectsProjectIdDelete(ctx context.Context, projectId string, params *DeleteProjectV1ProjectsProjectIdDeleteParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteProjectV1ProjectsProjectIdDeleteRequest(c.Server, projectId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetProjectByIDV1ProjectsProjectIdGet(ctx context.Context, projectId string, params *GetProjectByIDV1ProjectsProjectIdGetParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetProjectByIDV1ProjectsProjectIdGetRequest(c.Server, projectId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetChaptersV1ProjectsProjectIdChaptersGet(ctx context.Context, projectId string, params *GetChaptersV1ProjectsProjectIdChaptersGetParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetChaptersV1ProjectsProjectIdChaptersGetRequest(c.Server, projectId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteChapterV1ProjectsProjectIdChaptersChapterIdDelete(ctx context.Context, projectId string, chapterId string, params *DeleteChapterV1ProjectsProjectIdChaptersChapterIdDeleteParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteChapterV1ProjectsProjectIdChaptersChapterIdDeleteRequest(c.Server, projectId, chapterId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetChapterByIDV1ProjectsProjectIdChaptersChapterIdGet(ctx context.Context, projectId string, chapterId string, params *GetChapterByIDV1ProjectsProjectIdChaptersChapterIdGetParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetChapterByIDV1ProjectsProjectIdChaptersChapterIdGetRequest(c.Server, projectId, chapterId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ConvertChapterV1ProjectsProjectIdChaptersChapterIdConvertPost(ctx context.Context, projectId string, chapterId string, params *ConvertChapterV1ProjectsProjectIdChaptersChapterIdConvertPostParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewConvertChapterV1ProjectsProjectIdChaptersChapterIdConvertPostRequest(c.Server, projectId, chapterId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetChapterSnapshotsV1ProjectsProjectIdChaptersChapterIdSnapshotsGet(ctx context.Context, projectId string, chapterId string, params *GetChapterSnapshotsV1ProjectsProjectIdChaptersChapterIdSnapshotsGetParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetChapterSnapshotsV1ProjectsProjectIdChaptersChapterIdSnapshotsGetRequest(c.Server, projectId, chapterId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) StreamChapterAudioV1ProjectsProjectIdChaptersChapterIdSnapshotsChapterSnapshotIdStreamPost(ctx context.Context, projectId string, chapterId string, chapterSnapshotId string, params *StreamChapterAudioV1ProjectsProjectIdChaptersChapterIdSnapshotsChapterSnapshotIdStreamPostParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewStreamChapterAudioV1ProjectsProjectIdChaptersChapterIdSnapshotsChapterSnapshotIdStreamPostRequest(c.Server, projectId, chapterId, chapterSnapshotId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ConvertProjectV1ProjectsProjectIdConvertPost(ctx context.Context, projectId string, params *ConvertProjectV1ProjectsProjectIdConvertPostParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewConvertProjectV1ProjectsProjectIdConvertPostRequest(c.Server, projectId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetProjectSnapshotsV1ProjectsProjectIdSnapshotsGet(ctx context.Context, projectId string, params *GetProjectSnapshotsV1ProjectsProjectIdSnapshotsGetParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetProjectSnapshotsV1ProjectsProjectIdSnapshotsGetRequest(c.Server, projectId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) StreamProjectAudioV1ProjectsProjectIdSnapshotsProjectSnapshotIdStreamPost(ctx context.Context, projectId string, projectSnapshotId string, params *StreamProjectAudioV1ProjectsProjectIdSnapshotsProjectSnapshotIdStreamPostParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewStreamProjectAudioV1ProjectsProjectIdSnapshotsProjectSnapshotIdStreamPostRequest(c.Server, projectId, projectSnapshotId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPostWithBody(ctx context.Context, projectId string, params *UpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPostParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPostRequestWithBody(c.Server, projectId, params, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPost(ctx context.Context, projectId string, params *UpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPostParams, body UpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPostJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPostRequest(c.Server, projectId, params, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) AddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePostWithBody(ctx context.Context, params *AddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePostParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePostRequestWithBody(c.Server, params, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetMetadataForAPronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdGet(ctx context.Context, pronunciationDictionaryId string, params *GetMetadataForAPronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdGetParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetMetadataForAPronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdGetRequest(c.Server, pronunciationDictionaryId, params)
 	if err != nil {
 		return nil, err
 	}
@@ -444,6 +728,73 @@ func (c *Client) EditVoiceSettingsV1VoicesVoiceIdSettingsEditPost(ctx context.Co
 		return nil, err
 	}
 	return c.Client.Do(req)
+}
+
+// NewRedirectToMintlifyDocsGetRequest generates requests for RedirectToMintlifyDocsGet
+func NewRedirectToMintlifyDocsGetRequest(server string) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/docs")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreatesAudioNativeEnabledProjectV1AudioNativePostRequestWithBody generates requests for CreatesAudioNativeEnabledProjectV1AudioNativePost with any type of body
+func NewCreatesAudioNativeEnabledProjectV1AudioNativePostRequestWithBody(server string, params *CreatesAudioNativeEnabledProjectV1AudioNativePostParams, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/audio-native")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	if params.XiApiKey != nil {
+		var headerParam0 string
+
+		headerParam0, err = runtime.StyleParamWithLocation("simple", false, "xi-api-key", runtime.ParamLocationHeader, *params.XiApiKey)
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("xi-api-key", headerParam0)
+	}
+
+	return req, nil
 }
 
 // NewGetGeneratedItemsV1HistoryGetRequest generates requests for GetGeneratedItemsV1HistoryGet
@@ -746,6 +1097,771 @@ func NewGetModelsV1ModelsGetRequest(server string, params *GetModelsV1ModelsGetP
 	return req, nil
 }
 
+// NewGetProjectsV1ProjectsGetRequest generates requests for GetProjectsV1ProjectsGet
+func NewGetProjectsV1ProjectsGetRequest(server string, params *GetProjectsV1ProjectsGetParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/projects")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	if params.XiApiKey != nil {
+		var headerParam0 string
+
+		headerParam0, err = runtime.StyleParamWithLocation("simple", false, "xi-api-key", runtime.ParamLocationHeader, *params.XiApiKey)
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("xi-api-key", headerParam0)
+	}
+
+	return req, nil
+}
+
+// NewAddProjectV1ProjectsAddPostRequestWithBody generates requests for AddProjectV1ProjectsAddPost with any type of body
+func NewAddProjectV1ProjectsAddPostRequestWithBody(server string, params *AddProjectV1ProjectsAddPostParams, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/projects/add")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	if params.XiApiKey != nil {
+		var headerParam0 string
+
+		headerParam0, err = runtime.StyleParamWithLocation("simple", false, "xi-api-key", runtime.ParamLocationHeader, *params.XiApiKey)
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("xi-api-key", headerParam0)
+	}
+
+	return req, nil
+}
+
+// NewDeleteProjectV1ProjectsProjectIdDeleteRequest generates requests for DeleteProjectV1ProjectsProjectIdDelete
+func NewDeleteProjectV1ProjectsProjectIdDeleteRequest(server string, projectId string, params *DeleteProjectV1ProjectsProjectIdDeleteParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "project_id", runtime.ParamLocationPath, projectId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/projects/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	if params.XiApiKey != nil {
+		var headerParam0 string
+
+		headerParam0, err = runtime.StyleParamWithLocation("simple", false, "xi-api-key", runtime.ParamLocationHeader, *params.XiApiKey)
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("xi-api-key", headerParam0)
+	}
+
+	return req, nil
+}
+
+// NewGetProjectByIDV1ProjectsProjectIdGetRequest generates requests for GetProjectByIDV1ProjectsProjectIdGet
+func NewGetProjectByIDV1ProjectsProjectIdGetRequest(server string, projectId string, params *GetProjectByIDV1ProjectsProjectIdGetParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "project_id", runtime.ParamLocationPath, projectId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/projects/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	if params.XiApiKey != nil {
+		var headerParam0 string
+
+		headerParam0, err = runtime.StyleParamWithLocation("simple", false, "xi-api-key", runtime.ParamLocationHeader, *params.XiApiKey)
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("xi-api-key", headerParam0)
+	}
+
+	return req, nil
+}
+
+// NewGetChaptersV1ProjectsProjectIdChaptersGetRequest generates requests for GetChaptersV1ProjectsProjectIdChaptersGet
+func NewGetChaptersV1ProjectsProjectIdChaptersGetRequest(server string, projectId string, params *GetChaptersV1ProjectsProjectIdChaptersGetParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "project_id", runtime.ParamLocationPath, projectId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/projects/%s/chapters", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	if params.XiApiKey != nil {
+		var headerParam0 string
+
+		headerParam0, err = runtime.StyleParamWithLocation("simple", false, "xi-api-key", runtime.ParamLocationHeader, *params.XiApiKey)
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("xi-api-key", headerParam0)
+	}
+
+	return req, nil
+}
+
+// NewDeleteChapterV1ProjectsProjectIdChaptersChapterIdDeleteRequest generates requests for DeleteChapterV1ProjectsProjectIdChaptersChapterIdDelete
+func NewDeleteChapterV1ProjectsProjectIdChaptersChapterIdDeleteRequest(server string, projectId string, chapterId string, params *DeleteChapterV1ProjectsProjectIdChaptersChapterIdDeleteParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "project_id", runtime.ParamLocationPath, projectId)
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithLocation("simple", false, "chapter_id", runtime.ParamLocationPath, chapterId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/projects/%s/chapters/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	if params.XiApiKey != nil {
+		var headerParam0 string
+
+		headerParam0, err = runtime.StyleParamWithLocation("simple", false, "xi-api-key", runtime.ParamLocationHeader, *params.XiApiKey)
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("xi-api-key", headerParam0)
+	}
+
+	return req, nil
+}
+
+// NewGetChapterByIDV1ProjectsProjectIdChaptersChapterIdGetRequest generates requests for GetChapterByIDV1ProjectsProjectIdChaptersChapterIdGet
+func NewGetChapterByIDV1ProjectsProjectIdChaptersChapterIdGetRequest(server string, projectId string, chapterId string, params *GetChapterByIDV1ProjectsProjectIdChaptersChapterIdGetParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "project_id", runtime.ParamLocationPath, projectId)
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithLocation("simple", false, "chapter_id", runtime.ParamLocationPath, chapterId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/projects/%s/chapters/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	if params.XiApiKey != nil {
+		var headerParam0 string
+
+		headerParam0, err = runtime.StyleParamWithLocation("simple", false, "xi-api-key", runtime.ParamLocationHeader, *params.XiApiKey)
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("xi-api-key", headerParam0)
+	}
+
+	return req, nil
+}
+
+// NewConvertChapterV1ProjectsProjectIdChaptersChapterIdConvertPostRequest generates requests for ConvertChapterV1ProjectsProjectIdChaptersChapterIdConvertPost
+func NewConvertChapterV1ProjectsProjectIdChaptersChapterIdConvertPostRequest(server string, projectId string, chapterId string, params *ConvertChapterV1ProjectsProjectIdChaptersChapterIdConvertPostParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "project_id", runtime.ParamLocationPath, projectId)
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithLocation("simple", false, "chapter_id", runtime.ParamLocationPath, chapterId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/projects/%s/chapters/%s/convert", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	if params.XiApiKey != nil {
+		var headerParam0 string
+
+		headerParam0, err = runtime.StyleParamWithLocation("simple", false, "xi-api-key", runtime.ParamLocationHeader, *params.XiApiKey)
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("xi-api-key", headerParam0)
+	}
+
+	return req, nil
+}
+
+// NewGetChapterSnapshotsV1ProjectsProjectIdChaptersChapterIdSnapshotsGetRequest generates requests for GetChapterSnapshotsV1ProjectsProjectIdChaptersChapterIdSnapshotsGet
+func NewGetChapterSnapshotsV1ProjectsProjectIdChaptersChapterIdSnapshotsGetRequest(server string, projectId string, chapterId string, params *GetChapterSnapshotsV1ProjectsProjectIdChaptersChapterIdSnapshotsGetParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "project_id", runtime.ParamLocationPath, projectId)
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithLocation("simple", false, "chapter_id", runtime.ParamLocationPath, chapterId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/projects/%s/chapters/%s/snapshots", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	if params.XiApiKey != nil {
+		var headerParam0 string
+
+		headerParam0, err = runtime.StyleParamWithLocation("simple", false, "xi-api-key", runtime.ParamLocationHeader, *params.XiApiKey)
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("xi-api-key", headerParam0)
+	}
+
+	return req, nil
+}
+
+// NewStreamChapterAudioV1ProjectsProjectIdChaptersChapterIdSnapshotsChapterSnapshotIdStreamPostRequest generates requests for StreamChapterAudioV1ProjectsProjectIdChaptersChapterIdSnapshotsChapterSnapshotIdStreamPost
+func NewStreamChapterAudioV1ProjectsProjectIdChaptersChapterIdSnapshotsChapterSnapshotIdStreamPostRequest(server string, projectId string, chapterId string, chapterSnapshotId string, params *StreamChapterAudioV1ProjectsProjectIdChaptersChapterIdSnapshotsChapterSnapshotIdStreamPostParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "project_id", runtime.ParamLocationPath, projectId)
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithLocation("simple", false, "chapter_id", runtime.ParamLocationPath, chapterId)
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam2 string
+
+	pathParam2, err = runtime.StyleParamWithLocation("simple", false, "chapter_snapshot_id", runtime.ParamLocationPath, chapterSnapshotId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/projects/%s/chapters/%s/snapshots/%s/stream", pathParam0, pathParam1, pathParam2)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	if params.XiApiKey != nil {
+		var headerParam0 string
+
+		headerParam0, err = runtime.StyleParamWithLocation("simple", false, "xi-api-key", runtime.ParamLocationHeader, *params.XiApiKey)
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("xi-api-key", headerParam0)
+	}
+
+	return req, nil
+}
+
+// NewConvertProjectV1ProjectsProjectIdConvertPostRequest generates requests for ConvertProjectV1ProjectsProjectIdConvertPost
+func NewConvertProjectV1ProjectsProjectIdConvertPostRequest(server string, projectId string, params *ConvertProjectV1ProjectsProjectIdConvertPostParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "project_id", runtime.ParamLocationPath, projectId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/projects/%s/convert", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	if params.XiApiKey != nil {
+		var headerParam0 string
+
+		headerParam0, err = runtime.StyleParamWithLocation("simple", false, "xi-api-key", runtime.ParamLocationHeader, *params.XiApiKey)
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("xi-api-key", headerParam0)
+	}
+
+	return req, nil
+}
+
+// NewGetProjectSnapshotsV1ProjectsProjectIdSnapshotsGetRequest generates requests for GetProjectSnapshotsV1ProjectsProjectIdSnapshotsGet
+func NewGetProjectSnapshotsV1ProjectsProjectIdSnapshotsGetRequest(server string, projectId string, params *GetProjectSnapshotsV1ProjectsProjectIdSnapshotsGetParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "project_id", runtime.ParamLocationPath, projectId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/projects/%s/snapshots", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	if params.XiApiKey != nil {
+		var headerParam0 string
+
+		headerParam0, err = runtime.StyleParamWithLocation("simple", false, "xi-api-key", runtime.ParamLocationHeader, *params.XiApiKey)
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("xi-api-key", headerParam0)
+	}
+
+	return req, nil
+}
+
+// NewStreamProjectAudioV1ProjectsProjectIdSnapshotsProjectSnapshotIdStreamPostRequest generates requests for StreamProjectAudioV1ProjectsProjectIdSnapshotsProjectSnapshotIdStreamPost
+func NewStreamProjectAudioV1ProjectsProjectIdSnapshotsProjectSnapshotIdStreamPostRequest(server string, projectId string, projectSnapshotId string, params *StreamProjectAudioV1ProjectsProjectIdSnapshotsProjectSnapshotIdStreamPostParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "project_id", runtime.ParamLocationPath, projectId)
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithLocation("simple", false, "project_snapshot_id", runtime.ParamLocationPath, projectSnapshotId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/projects/%s/snapshots/%s/stream", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	if params.XiApiKey != nil {
+		var headerParam0 string
+
+		headerParam0, err = runtime.StyleParamWithLocation("simple", false, "xi-api-key", runtime.ParamLocationHeader, *params.XiApiKey)
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("xi-api-key", headerParam0)
+	}
+
+	return req, nil
+}
+
+// NewUpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPostRequest calls the generic UpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPost builder with application/json body
+func NewUpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPostRequest(server string, projectId string, params *UpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPostParams, body UpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPostJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPostRequestWithBody(server, projectId, params, "application/json", bodyReader)
+}
+
+// NewUpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPostRequestWithBody generates requests for UpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPost with any type of body
+func NewUpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPostRequestWithBody(server string, projectId string, params *UpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPostParams, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "project_id", runtime.ParamLocationPath, projectId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/projects/%s/update-pronunciation-dictionaries", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	if params.XiApiKey != nil {
+		var headerParam0 string
+
+		headerParam0, err = runtime.StyleParamWithLocation("simple", false, "xi-api-key", runtime.ParamLocationHeader, *params.XiApiKey)
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("xi-api-key", headerParam0)
+	}
+
+	return req, nil
+}
+
+// NewAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePostRequestWithBody generates requests for AddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePost with any type of body
+func NewAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePostRequestWithBody(server string, params *AddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePostParams, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/pronunciation-dictionaries/add-from-file")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	if params.XiApiKey != nil {
+		var headerParam0 string
+
+		headerParam0, err = runtime.StyleParamWithLocation("simple", false, "xi-api-key", runtime.ParamLocationHeader, *params.XiApiKey)
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("xi-api-key", headerParam0)
+	}
+
+	return req, nil
+}
+
+// NewGetMetadataForAPronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdGetRequest generates requests for GetMetadataForAPronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdGet
+func NewGetMetadataForAPronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdGetRequest(server string, pronunciationDictionaryId string, params *GetMetadataForAPronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdGetParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "pronunciation_dictionary_id", runtime.ParamLocationPath, pronunciationDictionaryId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/pronunciation-dictionaries/%s/", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	if params.XiApiKey != nil {
+		var headerParam0 string
+
+		headerParam0, err = runtime.StyleParamWithLocation("simple", false, "xi-api-key", runtime.ParamLocationHeader, *params.XiApiKey)
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("xi-api-key", headerParam0)
+	}
+
+	return req, nil
+}
+
 // NewTextToSpeechV1TextToSpeechVoiceIdPostRequest calls the generic TextToSpeechV1TextToSpeechVoiceIdPost builder with application/json body
 func NewTextToSpeechV1TextToSpeechVoiceIdPostRequest(server string, voiceId string, params *TextToSpeechV1TextToSpeechVoiceIdPostParams, body TextToSpeechV1TextToSpeechVoiceIdPostJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
@@ -789,6 +1905,22 @@ func NewTextToSpeechV1TextToSpeechVoiceIdPostRequestWithBody(server string, voic
 		if params.OptimizeStreamingLatency != nil {
 
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "optimize_streaming_latency", runtime.ParamLocationQuery, *params.OptimizeStreamingLatency); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.OutputFormat != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "output_format", runtime.ParamLocationQuery, *params.OutputFormat); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
 				return nil, err
@@ -869,6 +2001,22 @@ func NewTextToSpeechV1TextToSpeechVoiceIdStreamPostRequestWithBody(server string
 		if params.OptimizeStreamingLatency != nil {
 
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "optimize_streaming_latency", runtime.ParamLocationQuery, *params.OptimizeStreamingLatency); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.OutputFormat != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "output_format", runtime.ParamLocationQuery, *params.OutputFormat); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
 				return nil, err
@@ -1496,6 +2644,12 @@ func WithBaseURL(baseURL string) ClientOption {
 
 // ClientWithResponsesInterface is the interface specification for the client with responses above.
 type ClientWithResponsesInterface interface {
+	// RedirectToMintlifyDocsGet request
+	RedirectToMintlifyDocsGetWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*RedirectToMintlifyDocsGetResponse, error)
+
+	// CreatesAudioNativeEnabledProjectV1AudioNativePost request with any body
+	CreatesAudioNativeEnabledProjectV1AudioNativePostWithBodyWithResponse(ctx context.Context, params *CreatesAudioNativeEnabledProjectV1AudioNativePostParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreatesAudioNativeEnabledProjectV1AudioNativePostResponse, error)
+
 	// GetGeneratedItemsV1HistoryGet request
 	GetGeneratedItemsV1HistoryGetWithResponse(ctx context.Context, params *GetGeneratedItemsV1HistoryGetParams, reqEditors ...RequestEditorFn) (*GetGeneratedItemsV1HistoryGetResponse, error)
 
@@ -1515,6 +2669,56 @@ type ClientWithResponsesInterface interface {
 
 	// GetModelsV1ModelsGet request
 	GetModelsV1ModelsGetWithResponse(ctx context.Context, params *GetModelsV1ModelsGetParams, reqEditors ...RequestEditorFn) (*GetModelsV1ModelsGetResponse, error)
+
+	// GetProjectsV1ProjectsGet request
+	GetProjectsV1ProjectsGetWithResponse(ctx context.Context, params *GetProjectsV1ProjectsGetParams, reqEditors ...RequestEditorFn) (*GetProjectsV1ProjectsGetResponse, error)
+
+	// AddProjectV1ProjectsAddPost request with any body
+	AddProjectV1ProjectsAddPostWithBodyWithResponse(ctx context.Context, params *AddProjectV1ProjectsAddPostParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AddProjectV1ProjectsAddPostResponse, error)
+
+	// DeleteProjectV1ProjectsProjectIdDelete request
+	DeleteProjectV1ProjectsProjectIdDeleteWithResponse(ctx context.Context, projectId string, params *DeleteProjectV1ProjectsProjectIdDeleteParams, reqEditors ...RequestEditorFn) (*DeleteProjectV1ProjectsProjectIdDeleteResponse, error)
+
+	// GetProjectByIDV1ProjectsProjectIdGet request
+	GetProjectByIDV1ProjectsProjectIdGetWithResponse(ctx context.Context, projectId string, params *GetProjectByIDV1ProjectsProjectIdGetParams, reqEditors ...RequestEditorFn) (*GetProjectByIDV1ProjectsProjectIdGetResponse, error)
+
+	// GetChaptersV1ProjectsProjectIdChaptersGet request
+	GetChaptersV1ProjectsProjectIdChaptersGetWithResponse(ctx context.Context, projectId string, params *GetChaptersV1ProjectsProjectIdChaptersGetParams, reqEditors ...RequestEditorFn) (*GetChaptersV1ProjectsProjectIdChaptersGetResponse, error)
+
+	// DeleteChapterV1ProjectsProjectIdChaptersChapterIdDelete request
+	DeleteChapterV1ProjectsProjectIdChaptersChapterIdDeleteWithResponse(ctx context.Context, projectId string, chapterId string, params *DeleteChapterV1ProjectsProjectIdChaptersChapterIdDeleteParams, reqEditors ...RequestEditorFn) (*DeleteChapterV1ProjectsProjectIdChaptersChapterIdDeleteResponse, error)
+
+	// GetChapterByIDV1ProjectsProjectIdChaptersChapterIdGet request
+	GetChapterByIDV1ProjectsProjectIdChaptersChapterIdGetWithResponse(ctx context.Context, projectId string, chapterId string, params *GetChapterByIDV1ProjectsProjectIdChaptersChapterIdGetParams, reqEditors ...RequestEditorFn) (*GetChapterByIDV1ProjectsProjectIdChaptersChapterIdGetResponse, error)
+
+	// ConvertChapterV1ProjectsProjectIdChaptersChapterIdConvertPost request
+	ConvertChapterV1ProjectsProjectIdChaptersChapterIdConvertPostWithResponse(ctx context.Context, projectId string, chapterId string, params *ConvertChapterV1ProjectsProjectIdChaptersChapterIdConvertPostParams, reqEditors ...RequestEditorFn) (*ConvertChapterV1ProjectsProjectIdChaptersChapterIdConvertPostResponse, error)
+
+	// GetChapterSnapshotsV1ProjectsProjectIdChaptersChapterIdSnapshotsGet request
+	GetChapterSnapshotsV1ProjectsProjectIdChaptersChapterIdSnapshotsGetWithResponse(ctx context.Context, projectId string, chapterId string, params *GetChapterSnapshotsV1ProjectsProjectIdChaptersChapterIdSnapshotsGetParams, reqEditors ...RequestEditorFn) (*GetChapterSnapshotsV1ProjectsProjectIdChaptersChapterIdSnapshotsGetResponse, error)
+
+	// StreamChapterAudioV1ProjectsProjectIdChaptersChapterIdSnapshotsChapterSnapshotIdStreamPost request
+	StreamChapterAudioV1ProjectsProjectIdChaptersChapterIdSnapshotsChapterSnapshotIdStreamPostWithResponse(ctx context.Context, projectId string, chapterId string, chapterSnapshotId string, params *StreamChapterAudioV1ProjectsProjectIdChaptersChapterIdSnapshotsChapterSnapshotIdStreamPostParams, reqEditors ...RequestEditorFn) (*StreamChapterAudioV1ProjectsProjectIdChaptersChapterIdSnapshotsChapterSnapshotIdStreamPostResponse, error)
+
+	// ConvertProjectV1ProjectsProjectIdConvertPost request
+	ConvertProjectV1ProjectsProjectIdConvertPostWithResponse(ctx context.Context, projectId string, params *ConvertProjectV1ProjectsProjectIdConvertPostParams, reqEditors ...RequestEditorFn) (*ConvertProjectV1ProjectsProjectIdConvertPostResponse, error)
+
+	// GetProjectSnapshotsV1ProjectsProjectIdSnapshotsGet request
+	GetProjectSnapshotsV1ProjectsProjectIdSnapshotsGetWithResponse(ctx context.Context, projectId string, params *GetProjectSnapshotsV1ProjectsProjectIdSnapshotsGetParams, reqEditors ...RequestEditorFn) (*GetProjectSnapshotsV1ProjectsProjectIdSnapshotsGetResponse, error)
+
+	// StreamProjectAudioV1ProjectsProjectIdSnapshotsProjectSnapshotIdStreamPost request
+	StreamProjectAudioV1ProjectsProjectIdSnapshotsProjectSnapshotIdStreamPostWithResponse(ctx context.Context, projectId string, projectSnapshotId string, params *StreamProjectAudioV1ProjectsProjectIdSnapshotsProjectSnapshotIdStreamPostParams, reqEditors ...RequestEditorFn) (*StreamProjectAudioV1ProjectsProjectIdSnapshotsProjectSnapshotIdStreamPostResponse, error)
+
+	// UpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPost request with any body
+	UpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPostWithBodyWithResponse(ctx context.Context, projectId string, params *UpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPostParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPostResponse, error)
+
+	UpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPostWithResponse(ctx context.Context, projectId string, params *UpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPostParams, body UpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPostJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPostResponse, error)
+
+	// AddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePost request with any body
+	AddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePostWithBodyWithResponse(ctx context.Context, params *AddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePostParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePostResponse, error)
+
+	// GetMetadataForAPronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdGet request
+	GetMetadataForAPronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdGetWithResponse(ctx context.Context, pronunciationDictionaryId string, params *GetMetadataForAPronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdGetParams, reqEditors ...RequestEditorFn) (*GetMetadataForAPronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdGetResponse, error)
 
 	// TextToSpeechV1TextToSpeechVoiceIdPost request with any body
 	TextToSpeechV1TextToSpeechVoiceIdPostWithBodyWithResponse(ctx context.Context, voiceId string, params *TextToSpeechV1TextToSpeechVoiceIdPostParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*TextToSpeechV1TextToSpeechVoiceIdPostResponse, error)
@@ -1563,6 +2767,51 @@ type ClientWithResponsesInterface interface {
 	EditVoiceSettingsV1VoicesVoiceIdSettingsEditPostWithBodyWithResponse(ctx context.Context, voiceId string, params *EditVoiceSettingsV1VoicesVoiceIdSettingsEditPostParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*EditVoiceSettingsV1VoicesVoiceIdSettingsEditPostResponse, error)
 
 	EditVoiceSettingsV1VoicesVoiceIdSettingsEditPostWithResponse(ctx context.Context, voiceId string, params *EditVoiceSettingsV1VoicesVoiceIdSettingsEditPostParams, body EditVoiceSettingsV1VoicesVoiceIdSettingsEditPostJSONRequestBody, reqEditors ...RequestEditorFn) (*EditVoiceSettingsV1VoicesVoiceIdSettingsEditPostResponse, error)
+}
+
+type RedirectToMintlifyDocsGetResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *interface{}
+}
+
+// Status returns HTTPResponse.Status
+func (r RedirectToMintlifyDocsGetResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r RedirectToMintlifyDocsGetResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreatesAudioNativeEnabledProjectV1AudioNativePostResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *AudioNativeCreateProjectResponseModel
+	JSON422      *HTTPValidationError
+}
+
+// Status returns HTTPResponse.Status
+func (r CreatesAudioNativeEnabledProjectV1AudioNativePostResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreatesAudioNativeEnabledProjectV1AudioNativePostResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
 }
 
 type GetGeneratedItemsV1HistoryGetResponse struct {
@@ -1695,6 +2944,372 @@ func (r GetModelsV1ModelsGetResponse) Status() string {
 
 // StatusCode returns HTTPResponse.StatusCode
 func (r GetModelsV1ModelsGetResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetProjectsV1ProjectsGetResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *GetProjectsResponseModel
+	JSON422      *HTTPValidationError
+}
+
+// Status returns HTTPResponse.Status
+func (r GetProjectsV1ProjectsGetResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetProjectsV1ProjectsGetResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type AddProjectV1ProjectsAddPostResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *AddProjectResponseModel
+	JSON422      *HTTPValidationError
+}
+
+// Status returns HTTPResponse.Status
+func (r AddProjectV1ProjectsAddPostResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AddProjectV1ProjectsAddPostResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DeleteProjectV1ProjectsProjectIdDeleteResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *interface{}
+	JSON422      *HTTPValidationError
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteProjectV1ProjectsProjectIdDeleteResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteProjectV1ProjectsProjectIdDeleteResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetProjectByIDV1ProjectsProjectIdGetResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *ProjectExtendedResponseModel
+	JSON422      *HTTPValidationError
+}
+
+// Status returns HTTPResponse.Status
+func (r GetProjectByIDV1ProjectsProjectIdGetResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetProjectByIDV1ProjectsProjectIdGetResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetChaptersV1ProjectsProjectIdChaptersGetResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *GetChaptersResponseModel
+	JSON422      *HTTPValidationError
+}
+
+// Status returns HTTPResponse.Status
+func (r GetChaptersV1ProjectsProjectIdChaptersGetResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetChaptersV1ProjectsProjectIdChaptersGetResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DeleteChapterV1ProjectsProjectIdChaptersChapterIdDeleteResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *interface{}
+	JSON422      *HTTPValidationError
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteChapterV1ProjectsProjectIdChaptersChapterIdDeleteResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteChapterV1ProjectsProjectIdChaptersChapterIdDeleteResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetChapterByIDV1ProjectsProjectIdChaptersChapterIdGetResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *ChapterResponseModel
+	JSON422      *HTTPValidationError
+}
+
+// Status returns HTTPResponse.Status
+func (r GetChapterByIDV1ProjectsProjectIdChaptersChapterIdGetResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetChapterByIDV1ProjectsProjectIdChaptersChapterIdGetResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ConvertChapterV1ProjectsProjectIdChaptersChapterIdConvertPostResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *interface{}
+	JSON422      *HTTPValidationError
+}
+
+// Status returns HTTPResponse.Status
+func (r ConvertChapterV1ProjectsProjectIdChaptersChapterIdConvertPostResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ConvertChapterV1ProjectsProjectIdChaptersChapterIdConvertPostResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetChapterSnapshotsV1ProjectsProjectIdChaptersChapterIdSnapshotsGetResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *ChapterSnapshotsResponseModel
+	JSON422      *HTTPValidationError
+}
+
+// Status returns HTTPResponse.Status
+func (r GetChapterSnapshotsV1ProjectsProjectIdChaptersChapterIdSnapshotsGetResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetChapterSnapshotsV1ProjectsProjectIdChaptersChapterIdSnapshotsGetResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type StreamChapterAudioV1ProjectsProjectIdChaptersChapterIdSnapshotsChapterSnapshotIdStreamPostResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON422      *HTTPValidationError
+}
+
+// Status returns HTTPResponse.Status
+func (r StreamChapterAudioV1ProjectsProjectIdChaptersChapterIdSnapshotsChapterSnapshotIdStreamPostResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r StreamChapterAudioV1ProjectsProjectIdChaptersChapterIdSnapshotsChapterSnapshotIdStreamPostResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ConvertProjectV1ProjectsProjectIdConvertPostResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *interface{}
+	JSON422      *HTTPValidationError
+}
+
+// Status returns HTTPResponse.Status
+func (r ConvertProjectV1ProjectsProjectIdConvertPostResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ConvertProjectV1ProjectsProjectIdConvertPostResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetProjectSnapshotsV1ProjectsProjectIdSnapshotsGetResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *ProjectSnapshotsResponseModel
+	JSON422      *HTTPValidationError
+}
+
+// Status returns HTTPResponse.Status
+func (r GetProjectSnapshotsV1ProjectsProjectIdSnapshotsGetResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetProjectSnapshotsV1ProjectsProjectIdSnapshotsGetResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type StreamProjectAudioV1ProjectsProjectIdSnapshotsProjectSnapshotIdStreamPostResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON422      *HTTPValidationError
+}
+
+// Status returns HTTPResponse.Status
+func (r StreamProjectAudioV1ProjectsProjectIdSnapshotsProjectSnapshotIdStreamPostResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r StreamProjectAudioV1ProjectsProjectIdSnapshotsProjectSnapshotIdStreamPostResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPostResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *interface{}
+	JSON422      *HTTPValidationError
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPostResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPostResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type AddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePostResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *AddPronunciationDictionaryResponseModel
+	JSON422      *HTTPValidationError
+}
+
+// Status returns HTTPResponse.Status
+func (r AddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePostResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePostResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetMetadataForAPronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdGetResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *GetPronunciationDictionaryMetadataResponseModel
+	JSON422      *HTTPValidationError
+}
+
+// Status returns HTTPResponse.Status
+func (r GetMetadataForAPronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdGetResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetMetadataForAPronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdGetResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -2019,6 +3634,24 @@ func (r EditVoiceSettingsV1VoicesVoiceIdSettingsEditPostResponse) StatusCode() i
 	return 0
 }
 
+// RedirectToMintlifyDocsGetWithResponse request returning *RedirectToMintlifyDocsGetResponse
+func (c *ClientWithResponses) RedirectToMintlifyDocsGetWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*RedirectToMintlifyDocsGetResponse, error) {
+	rsp, err := c.RedirectToMintlifyDocsGet(ctx, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseRedirectToMintlifyDocsGetResponse(rsp)
+}
+
+// CreatesAudioNativeEnabledProjectV1AudioNativePostWithBodyWithResponse request with arbitrary body returning *CreatesAudioNativeEnabledProjectV1AudioNativePostResponse
+func (c *ClientWithResponses) CreatesAudioNativeEnabledProjectV1AudioNativePostWithBodyWithResponse(ctx context.Context, params *CreatesAudioNativeEnabledProjectV1AudioNativePostParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreatesAudioNativeEnabledProjectV1AudioNativePostResponse, error) {
+	rsp, err := c.CreatesAudioNativeEnabledProjectV1AudioNativePostWithBody(ctx, params, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreatesAudioNativeEnabledProjectV1AudioNativePostResponse(rsp)
+}
+
 // GetGeneratedItemsV1HistoryGetWithResponse request returning *GetGeneratedItemsV1HistoryGetResponse
 func (c *ClientWithResponses) GetGeneratedItemsV1HistoryGetWithResponse(ctx context.Context, params *GetGeneratedItemsV1HistoryGetParams, reqEditors ...RequestEditorFn) (*GetGeneratedItemsV1HistoryGetResponse, error) {
 	rsp, err := c.GetGeneratedItemsV1HistoryGet(ctx, params, reqEditors...)
@@ -2079,6 +3712,158 @@ func (c *ClientWithResponses) GetModelsV1ModelsGetWithResponse(ctx context.Conte
 		return nil, err
 	}
 	return ParseGetModelsV1ModelsGetResponse(rsp)
+}
+
+// GetProjectsV1ProjectsGetWithResponse request returning *GetProjectsV1ProjectsGetResponse
+func (c *ClientWithResponses) GetProjectsV1ProjectsGetWithResponse(ctx context.Context, params *GetProjectsV1ProjectsGetParams, reqEditors ...RequestEditorFn) (*GetProjectsV1ProjectsGetResponse, error) {
+	rsp, err := c.GetProjectsV1ProjectsGet(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetProjectsV1ProjectsGetResponse(rsp)
+}
+
+// AddProjectV1ProjectsAddPostWithBodyWithResponse request with arbitrary body returning *AddProjectV1ProjectsAddPostResponse
+func (c *ClientWithResponses) AddProjectV1ProjectsAddPostWithBodyWithResponse(ctx context.Context, params *AddProjectV1ProjectsAddPostParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AddProjectV1ProjectsAddPostResponse, error) {
+	rsp, err := c.AddProjectV1ProjectsAddPostWithBody(ctx, params, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAddProjectV1ProjectsAddPostResponse(rsp)
+}
+
+// DeleteProjectV1ProjectsProjectIdDeleteWithResponse request returning *DeleteProjectV1ProjectsProjectIdDeleteResponse
+func (c *ClientWithResponses) DeleteProjectV1ProjectsProjectIdDeleteWithResponse(ctx context.Context, projectId string, params *DeleteProjectV1ProjectsProjectIdDeleteParams, reqEditors ...RequestEditorFn) (*DeleteProjectV1ProjectsProjectIdDeleteResponse, error) {
+	rsp, err := c.DeleteProjectV1ProjectsProjectIdDelete(ctx, projectId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteProjectV1ProjectsProjectIdDeleteResponse(rsp)
+}
+
+// GetProjectByIDV1ProjectsProjectIdGetWithResponse request returning *GetProjectByIDV1ProjectsProjectIdGetResponse
+func (c *ClientWithResponses) GetProjectByIDV1ProjectsProjectIdGetWithResponse(ctx context.Context, projectId string, params *GetProjectByIDV1ProjectsProjectIdGetParams, reqEditors ...RequestEditorFn) (*GetProjectByIDV1ProjectsProjectIdGetResponse, error) {
+	rsp, err := c.GetProjectByIDV1ProjectsProjectIdGet(ctx, projectId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetProjectByIDV1ProjectsProjectIdGetResponse(rsp)
+}
+
+// GetChaptersV1ProjectsProjectIdChaptersGetWithResponse request returning *GetChaptersV1ProjectsProjectIdChaptersGetResponse
+func (c *ClientWithResponses) GetChaptersV1ProjectsProjectIdChaptersGetWithResponse(ctx context.Context, projectId string, params *GetChaptersV1ProjectsProjectIdChaptersGetParams, reqEditors ...RequestEditorFn) (*GetChaptersV1ProjectsProjectIdChaptersGetResponse, error) {
+	rsp, err := c.GetChaptersV1ProjectsProjectIdChaptersGet(ctx, projectId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetChaptersV1ProjectsProjectIdChaptersGetResponse(rsp)
+}
+
+// DeleteChapterV1ProjectsProjectIdChaptersChapterIdDeleteWithResponse request returning *DeleteChapterV1ProjectsProjectIdChaptersChapterIdDeleteResponse
+func (c *ClientWithResponses) DeleteChapterV1ProjectsProjectIdChaptersChapterIdDeleteWithResponse(ctx context.Context, projectId string, chapterId string, params *DeleteChapterV1ProjectsProjectIdChaptersChapterIdDeleteParams, reqEditors ...RequestEditorFn) (*DeleteChapterV1ProjectsProjectIdChaptersChapterIdDeleteResponse, error) {
+	rsp, err := c.DeleteChapterV1ProjectsProjectIdChaptersChapterIdDelete(ctx, projectId, chapterId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteChapterV1ProjectsProjectIdChaptersChapterIdDeleteResponse(rsp)
+}
+
+// GetChapterByIDV1ProjectsProjectIdChaptersChapterIdGetWithResponse request returning *GetChapterByIDV1ProjectsProjectIdChaptersChapterIdGetResponse
+func (c *ClientWithResponses) GetChapterByIDV1ProjectsProjectIdChaptersChapterIdGetWithResponse(ctx context.Context, projectId string, chapterId string, params *GetChapterByIDV1ProjectsProjectIdChaptersChapterIdGetParams, reqEditors ...RequestEditorFn) (*GetChapterByIDV1ProjectsProjectIdChaptersChapterIdGetResponse, error) {
+	rsp, err := c.GetChapterByIDV1ProjectsProjectIdChaptersChapterIdGet(ctx, projectId, chapterId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetChapterByIDV1ProjectsProjectIdChaptersChapterIdGetResponse(rsp)
+}
+
+// ConvertChapterV1ProjectsProjectIdChaptersChapterIdConvertPostWithResponse request returning *ConvertChapterV1ProjectsProjectIdChaptersChapterIdConvertPostResponse
+func (c *ClientWithResponses) ConvertChapterV1ProjectsProjectIdChaptersChapterIdConvertPostWithResponse(ctx context.Context, projectId string, chapterId string, params *ConvertChapterV1ProjectsProjectIdChaptersChapterIdConvertPostParams, reqEditors ...RequestEditorFn) (*ConvertChapterV1ProjectsProjectIdChaptersChapterIdConvertPostResponse, error) {
+	rsp, err := c.ConvertChapterV1ProjectsProjectIdChaptersChapterIdConvertPost(ctx, projectId, chapterId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseConvertChapterV1ProjectsProjectIdChaptersChapterIdConvertPostResponse(rsp)
+}
+
+// GetChapterSnapshotsV1ProjectsProjectIdChaptersChapterIdSnapshotsGetWithResponse request returning *GetChapterSnapshotsV1ProjectsProjectIdChaptersChapterIdSnapshotsGetResponse
+func (c *ClientWithResponses) GetChapterSnapshotsV1ProjectsProjectIdChaptersChapterIdSnapshotsGetWithResponse(ctx context.Context, projectId string, chapterId string, params *GetChapterSnapshotsV1ProjectsProjectIdChaptersChapterIdSnapshotsGetParams, reqEditors ...RequestEditorFn) (*GetChapterSnapshotsV1ProjectsProjectIdChaptersChapterIdSnapshotsGetResponse, error) {
+	rsp, err := c.GetChapterSnapshotsV1ProjectsProjectIdChaptersChapterIdSnapshotsGet(ctx, projectId, chapterId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetChapterSnapshotsV1ProjectsProjectIdChaptersChapterIdSnapshotsGetResponse(rsp)
+}
+
+// StreamChapterAudioV1ProjectsProjectIdChaptersChapterIdSnapshotsChapterSnapshotIdStreamPostWithResponse request returning *StreamChapterAudioV1ProjectsProjectIdChaptersChapterIdSnapshotsChapterSnapshotIdStreamPostResponse
+func (c *ClientWithResponses) StreamChapterAudioV1ProjectsProjectIdChaptersChapterIdSnapshotsChapterSnapshotIdStreamPostWithResponse(ctx context.Context, projectId string, chapterId string, chapterSnapshotId string, params *StreamChapterAudioV1ProjectsProjectIdChaptersChapterIdSnapshotsChapterSnapshotIdStreamPostParams, reqEditors ...RequestEditorFn) (*StreamChapterAudioV1ProjectsProjectIdChaptersChapterIdSnapshotsChapterSnapshotIdStreamPostResponse, error) {
+	rsp, err := c.StreamChapterAudioV1ProjectsProjectIdChaptersChapterIdSnapshotsChapterSnapshotIdStreamPost(ctx, projectId, chapterId, chapterSnapshotId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseStreamChapterAudioV1ProjectsProjectIdChaptersChapterIdSnapshotsChapterSnapshotIdStreamPostResponse(rsp)
+}
+
+// ConvertProjectV1ProjectsProjectIdConvertPostWithResponse request returning *ConvertProjectV1ProjectsProjectIdConvertPostResponse
+func (c *ClientWithResponses) ConvertProjectV1ProjectsProjectIdConvertPostWithResponse(ctx context.Context, projectId string, params *ConvertProjectV1ProjectsProjectIdConvertPostParams, reqEditors ...RequestEditorFn) (*ConvertProjectV1ProjectsProjectIdConvertPostResponse, error) {
+	rsp, err := c.ConvertProjectV1ProjectsProjectIdConvertPost(ctx, projectId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseConvertProjectV1ProjectsProjectIdConvertPostResponse(rsp)
+}
+
+// GetProjectSnapshotsV1ProjectsProjectIdSnapshotsGetWithResponse request returning *GetProjectSnapshotsV1ProjectsProjectIdSnapshotsGetResponse
+func (c *ClientWithResponses) GetProjectSnapshotsV1ProjectsProjectIdSnapshotsGetWithResponse(ctx context.Context, projectId string, params *GetProjectSnapshotsV1ProjectsProjectIdSnapshotsGetParams, reqEditors ...RequestEditorFn) (*GetProjectSnapshotsV1ProjectsProjectIdSnapshotsGetResponse, error) {
+	rsp, err := c.GetProjectSnapshotsV1ProjectsProjectIdSnapshotsGet(ctx, projectId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetProjectSnapshotsV1ProjectsProjectIdSnapshotsGetResponse(rsp)
+}
+
+// StreamProjectAudioV1ProjectsProjectIdSnapshotsProjectSnapshotIdStreamPostWithResponse request returning *StreamProjectAudioV1ProjectsProjectIdSnapshotsProjectSnapshotIdStreamPostResponse
+func (c *ClientWithResponses) StreamProjectAudioV1ProjectsProjectIdSnapshotsProjectSnapshotIdStreamPostWithResponse(ctx context.Context, projectId string, projectSnapshotId string, params *StreamProjectAudioV1ProjectsProjectIdSnapshotsProjectSnapshotIdStreamPostParams, reqEditors ...RequestEditorFn) (*StreamProjectAudioV1ProjectsProjectIdSnapshotsProjectSnapshotIdStreamPostResponse, error) {
+	rsp, err := c.StreamProjectAudioV1ProjectsProjectIdSnapshotsProjectSnapshotIdStreamPost(ctx, projectId, projectSnapshotId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseStreamProjectAudioV1ProjectsProjectIdSnapshotsProjectSnapshotIdStreamPostResponse(rsp)
+}
+
+// UpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPostWithBodyWithResponse request with arbitrary body returning *UpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPostResponse
+func (c *ClientWithResponses) UpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPostWithBodyWithResponse(ctx context.Context, projectId string, params *UpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPostParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPostResponse, error) {
+	rsp, err := c.UpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPostWithBody(ctx, projectId, params, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPostResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPostWithResponse(ctx context.Context, projectId string, params *UpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPostParams, body UpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPostJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPostResponse, error) {
+	rsp, err := c.UpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPost(ctx, projectId, params, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPostResponse(rsp)
+}
+
+// AddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePostWithBodyWithResponse request with arbitrary body returning *AddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePostResponse
+func (c *ClientWithResponses) AddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePostWithBodyWithResponse(ctx context.Context, params *AddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePostParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePostResponse, error) {
+	rsp, err := c.AddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePostWithBody(ctx, params, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePostResponse(rsp)
+}
+
+// GetMetadataForAPronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdGetWithResponse request returning *GetMetadataForAPronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdGetResponse
+func (c *ClientWithResponses) GetMetadataForAPronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdGetWithResponse(ctx context.Context, pronunciationDictionaryId string, params *GetMetadataForAPronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdGetParams, reqEditors ...RequestEditorFn) (*GetMetadataForAPronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdGetResponse, error) {
+	rsp, err := c.GetMetadataForAPronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdGet(ctx, pronunciationDictionaryId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetMetadataForAPronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdGetResponse(rsp)
 }
 
 // TextToSpeechV1TextToSpeechVoiceIdPostWithBodyWithResponse request with arbitrary body returning *TextToSpeechV1TextToSpeechVoiceIdPostResponse
@@ -2229,6 +4014,65 @@ func (c *ClientWithResponses) EditVoiceSettingsV1VoicesVoiceIdSettingsEditPostWi
 		return nil, err
 	}
 	return ParseEditVoiceSettingsV1VoicesVoiceIdSettingsEditPostResponse(rsp)
+}
+
+// ParseRedirectToMintlifyDocsGetResponse parses an HTTP response from a RedirectToMintlifyDocsGetWithResponse call
+func ParseRedirectToMintlifyDocsGetResponse(rsp *http.Response) (*RedirectToMintlifyDocsGetResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &RedirectToMintlifyDocsGetResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest interface{}
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreatesAudioNativeEnabledProjectV1AudioNativePostResponse parses an HTTP response from a CreatesAudioNativeEnabledProjectV1AudioNativePostWithResponse call
+func ParseCreatesAudioNativeEnabledProjectV1AudioNativePostResponse(rsp *http.Response) (*CreatesAudioNativeEnabledProjectV1AudioNativePostResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreatesAudioNativeEnabledProjectV1AudioNativePostResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest AudioNativeCreateProjectResponseModel
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest HTTPValidationError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	}
+
+	return response, nil
 }
 
 // ParseGetGeneratedItemsV1HistoryGetResponse parses an HTTP response from a GetGeneratedItemsV1HistoryGetWithResponse call
@@ -2398,6 +4242,520 @@ func ParseGetModelsV1ModelsGetResponse(rsp *http.Response) (*GetModelsV1ModelsGe
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest []ModelResponseModel
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest HTTPValidationError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetProjectsV1ProjectsGetResponse parses an HTTP response from a GetProjectsV1ProjectsGetWithResponse call
+func ParseGetProjectsV1ProjectsGetResponse(rsp *http.Response) (*GetProjectsV1ProjectsGetResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetProjectsV1ProjectsGetResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GetProjectsResponseModel
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest HTTPValidationError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAddProjectV1ProjectsAddPostResponse parses an HTTP response from a AddProjectV1ProjectsAddPostWithResponse call
+func ParseAddProjectV1ProjectsAddPostResponse(rsp *http.Response) (*AddProjectV1ProjectsAddPostResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AddProjectV1ProjectsAddPostResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest AddProjectResponseModel
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest HTTPValidationError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDeleteProjectV1ProjectsProjectIdDeleteResponse parses an HTTP response from a DeleteProjectV1ProjectsProjectIdDeleteWithResponse call
+func ParseDeleteProjectV1ProjectsProjectIdDeleteResponse(rsp *http.Response) (*DeleteProjectV1ProjectsProjectIdDeleteResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteProjectV1ProjectsProjectIdDeleteResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest interface{}
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest HTTPValidationError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetProjectByIDV1ProjectsProjectIdGetResponse parses an HTTP response from a GetProjectByIDV1ProjectsProjectIdGetWithResponse call
+func ParseGetProjectByIDV1ProjectsProjectIdGetResponse(rsp *http.Response) (*GetProjectByIDV1ProjectsProjectIdGetResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetProjectByIDV1ProjectsProjectIdGetResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ProjectExtendedResponseModel
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest HTTPValidationError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetChaptersV1ProjectsProjectIdChaptersGetResponse parses an HTTP response from a GetChaptersV1ProjectsProjectIdChaptersGetWithResponse call
+func ParseGetChaptersV1ProjectsProjectIdChaptersGetResponse(rsp *http.Response) (*GetChaptersV1ProjectsProjectIdChaptersGetResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetChaptersV1ProjectsProjectIdChaptersGetResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GetChaptersResponseModel
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest HTTPValidationError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDeleteChapterV1ProjectsProjectIdChaptersChapterIdDeleteResponse parses an HTTP response from a DeleteChapterV1ProjectsProjectIdChaptersChapterIdDeleteWithResponse call
+func ParseDeleteChapterV1ProjectsProjectIdChaptersChapterIdDeleteResponse(rsp *http.Response) (*DeleteChapterV1ProjectsProjectIdChaptersChapterIdDeleteResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteChapterV1ProjectsProjectIdChaptersChapterIdDeleteResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest interface{}
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest HTTPValidationError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetChapterByIDV1ProjectsProjectIdChaptersChapterIdGetResponse parses an HTTP response from a GetChapterByIDV1ProjectsProjectIdChaptersChapterIdGetWithResponse call
+func ParseGetChapterByIDV1ProjectsProjectIdChaptersChapterIdGetResponse(rsp *http.Response) (*GetChapterByIDV1ProjectsProjectIdChaptersChapterIdGetResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetChapterByIDV1ProjectsProjectIdChaptersChapterIdGetResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ChapterResponseModel
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest HTTPValidationError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseConvertChapterV1ProjectsProjectIdChaptersChapterIdConvertPostResponse parses an HTTP response from a ConvertChapterV1ProjectsProjectIdChaptersChapterIdConvertPostWithResponse call
+func ParseConvertChapterV1ProjectsProjectIdChaptersChapterIdConvertPostResponse(rsp *http.Response) (*ConvertChapterV1ProjectsProjectIdChaptersChapterIdConvertPostResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ConvertChapterV1ProjectsProjectIdChaptersChapterIdConvertPostResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest interface{}
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest HTTPValidationError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetChapterSnapshotsV1ProjectsProjectIdChaptersChapterIdSnapshotsGetResponse parses an HTTP response from a GetChapterSnapshotsV1ProjectsProjectIdChaptersChapterIdSnapshotsGetWithResponse call
+func ParseGetChapterSnapshotsV1ProjectsProjectIdChaptersChapterIdSnapshotsGetResponse(rsp *http.Response) (*GetChapterSnapshotsV1ProjectsProjectIdChaptersChapterIdSnapshotsGetResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetChapterSnapshotsV1ProjectsProjectIdChaptersChapterIdSnapshotsGetResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ChapterSnapshotsResponseModel
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest HTTPValidationError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseStreamChapterAudioV1ProjectsProjectIdChaptersChapterIdSnapshotsChapterSnapshotIdStreamPostResponse parses an HTTP response from a StreamChapterAudioV1ProjectsProjectIdChaptersChapterIdSnapshotsChapterSnapshotIdStreamPostWithResponse call
+func ParseStreamChapterAudioV1ProjectsProjectIdChaptersChapterIdSnapshotsChapterSnapshotIdStreamPostResponse(rsp *http.Response) (*StreamChapterAudioV1ProjectsProjectIdChaptersChapterIdSnapshotsChapterSnapshotIdStreamPostResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &StreamChapterAudioV1ProjectsProjectIdChaptersChapterIdSnapshotsChapterSnapshotIdStreamPostResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest HTTPValidationError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseConvertProjectV1ProjectsProjectIdConvertPostResponse parses an HTTP response from a ConvertProjectV1ProjectsProjectIdConvertPostWithResponse call
+func ParseConvertProjectV1ProjectsProjectIdConvertPostResponse(rsp *http.Response) (*ConvertProjectV1ProjectsProjectIdConvertPostResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ConvertProjectV1ProjectsProjectIdConvertPostResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest interface{}
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest HTTPValidationError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetProjectSnapshotsV1ProjectsProjectIdSnapshotsGetResponse parses an HTTP response from a GetProjectSnapshotsV1ProjectsProjectIdSnapshotsGetWithResponse call
+func ParseGetProjectSnapshotsV1ProjectsProjectIdSnapshotsGetResponse(rsp *http.Response) (*GetProjectSnapshotsV1ProjectsProjectIdSnapshotsGetResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetProjectSnapshotsV1ProjectsProjectIdSnapshotsGetResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ProjectSnapshotsResponseModel
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest HTTPValidationError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseStreamProjectAudioV1ProjectsProjectIdSnapshotsProjectSnapshotIdStreamPostResponse parses an HTTP response from a StreamProjectAudioV1ProjectsProjectIdSnapshotsProjectSnapshotIdStreamPostWithResponse call
+func ParseStreamProjectAudioV1ProjectsProjectIdSnapshotsProjectSnapshotIdStreamPostResponse(rsp *http.Response) (*StreamProjectAudioV1ProjectsProjectIdSnapshotsProjectSnapshotIdStreamPostResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &StreamProjectAudioV1ProjectsProjectIdSnapshotsProjectSnapshotIdStreamPostResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest HTTPValidationError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPostResponse parses an HTTP response from a UpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPostWithResponse call
+func ParseUpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPostResponse(rsp *http.Response) (*UpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPostResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPostResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest interface{}
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest HTTPValidationError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePostResponse parses an HTTP response from a AddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePostWithResponse call
+func ParseAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePostResponse(rsp *http.Response) (*AddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePostResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePostResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest AddPronunciationDictionaryResponseModel
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest HTTPValidationError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetMetadataForAPronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdGetResponse parses an HTTP response from a GetMetadataForAPronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdGetWithResponse call
+func ParseGetMetadataForAPronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdGetResponse(rsp *http.Response) (*GetMetadataForAPronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdGetResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetMetadataForAPronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdGetResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GetPronunciationDictionaryMetadataResponseModel
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}

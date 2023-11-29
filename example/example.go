@@ -8,7 +8,7 @@ import (
 	"log"
 	"os"
 
-	xi "github.com/kalameet4857/elevenlabs-go-unofficial"
+	xi "github.com/rwrz/elevenlabs-go-unofficial"
 )
 
 var key *string

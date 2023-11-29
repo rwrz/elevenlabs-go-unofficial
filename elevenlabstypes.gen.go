@@ -10,6 +10,12 @@ import (
 	openapi_types "github.com/deepmap/oapi-codegen/pkg/types"
 )
 
+// Defines values for ChapterResponseModelState.
+const (
+	ChapterResponseModelStateConverting ChapterResponseModelState = "converting"
+	ChapterResponseModelStateDefault    ChapterResponseModelState = "default"
+)
+
 // Defines values for ExtendedSubscriptionResponseModelCurrency.
 const (
 	ExtendedSubscriptionResponseModelCurrencyEur ExtendedSubscriptionResponseModelCurrency = "eur"
@@ -42,6 +48,27 @@ const (
 	Processing HistoryItemResponseModelState = "processing"
 )
 
+// Defines values for HistoryItemResponseModelVoiceCategory.
+const (
+	Cloned       HistoryItemResponseModelVoiceCategory = "cloned"
+	Generated    HistoryItemResponseModelVoiceCategory = "generated"
+	Premade      HistoryItemResponseModelVoiceCategory = "premade"
+	Professional HistoryItemResponseModelVoiceCategory = "professional"
+)
+
+// Defines values for ProjectExtendedResponseModelState.
+const (
+	ProjectExtendedResponseModelStateConverting ProjectExtendedResponseModelState = "converting"
+	ProjectExtendedResponseModelStateDefault    ProjectExtendedResponseModelState = "default"
+	ProjectExtendedResponseModelStateInQueue    ProjectExtendedResponseModelState = "in_queue"
+)
+
+// Defines values for ProjectResponseModelState.
+const (
+	Converting ProjectResponseModelState = "converting"
+	Default    ProjectResponseModelState = "default"
+)
+
 // Defines values for SubscriptionResponseModelCurrency.
 const (
 	SubscriptionResponseModelCurrencyEur SubscriptionResponseModelCurrency = "eur"
@@ -60,6 +87,15 @@ const (
 	SubscriptionResponseModelStatusUnpaid            SubscriptionResponseModelStatus = "unpaid"
 )
 
+// Defines values for VoiceSharingResponseModelReviewStatus.
+const (
+	Allowed            VoiceSharingResponseModelReviewStatus = "allowed"
+	AllowedWithChanges VoiceSharingResponseModelReviewStatus = "allowed_with_changes"
+	Declined           VoiceSharingResponseModelReviewStatus = "declined"
+	NotRequested       VoiceSharingResponseModelReviewStatus = "not_requested"
+	Pending            VoiceSharingResponseModelReviewStatus = "pending"
+)
+
 // Defines values for VoiceSharingResponseModelStatus.
 const (
 	Copied         VoiceSharingResponseModelStatus = "copied"
@@ -68,9 +104,85 @@ const (
 	Enabled        VoiceSharingResponseModelStatus = "enabled"
 )
 
+// AddProjectResponseModel defines model for AddProjectResponseModel.
+type AddProjectResponseModel struct {
+	Project ProjectResponseModel `json:"project"`
+}
+
+// AddPronunciationDictionaryResponseModel defines model for AddPronunciationDictionaryResponseModel.
+type AddPronunciationDictionaryResponseModel struct {
+	CreatedBy        string  `json:"created_by"`
+	CreationTimeUnix int     `json:"creation_time_unix"`
+	Description      *string `json:"description,omitempty"`
+	Id               string  `json:"id"`
+	Name             string  `json:"name"`
+	VersionId        string  `json:"version_id"`
+}
+
 // AddVoiceResponseModel defines model for AddVoiceResponseModel.
 type AddVoiceResponseModel struct {
 	VoiceId string `json:"voice_id"`
+}
+
+// AudioNativeCreateProjectResponseModel defines model for AudioNativeCreateProjectResponseModel.
+type AudioNativeCreateProjectResponseModel struct {
+	Converting  bool   `json:"converting"`
+	HtmlSnippet string `json:"html_snippet"`
+	ProjectId   string `json:"project_id"`
+}
+
+// BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePost defines model for Body_Add_a_pronunciation_dictionary_v1_pronunciation_dictionaries_add_from_file_post.
+type BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePost struct {
+	// Description A description of the pronunciation dictionary, used for identification only.
+	Description *string `json:"description,omitempty"`
+
+	// File A lexicon .pls file which we will use to initialize the project with.
+	File *openapi_types.File `json:"file,omitempty"`
+
+	// Name The name of the pronunciation dictionary, used for identification only.
+	Name string `json:"name"`
+}
+
+// BodyAddProjectV1ProjectsAddPost defines model for Body_Add_project_v1_projects_add_post.
+type BodyAddProjectV1ProjectsAddPost struct {
+	// AcxVolumeNormalization When the project is downloaded, should the returned audio have postprocessing in order to make it compliant with ACX loudness requirements
+	AcxVolumeNormalization *bool `json:"acx_volume_normalization,omitempty"`
+
+	// Author An optional name of the author of the project, this will be added as metadata to the mp3 file on project / chapter download.
+	Author *string `json:"author,omitempty"`
+
+	// DefaultModelId The model_id of the model to be used for this project, you can query GET https://api.elevenlabs.io/v1/models to list all available models.
+	DefaultModelId string `json:"default_model_id"`
+
+	// DefaultParagraphVoiceId The voice_id that corresponds to the default voice used for new paragraphs.
+	DefaultParagraphVoiceId string `json:"default_paragraph_voice_id"`
+
+	// DefaultTitleVoiceId The voice_id that corresponds to the default voice used for new titles.
+	DefaultTitleVoiceId string `json:"default_title_voice_id"`
+
+	// FromDocument An optional .epub, .pdf, .txt or similar file can be provided. If provided, we will initialize the project with its content. If this is set, 'from_url' must be null.  If neither 'from_url' or 'from_document' are provided we will initialize the project as blank.
+	FromDocument *openapi_types.File `json:"from_document,omitempty"`
+
+	// FromUrl An optional URL from which we will extract content to initialize the project. If this is set, 'from_url' must be null. If neither 'from_url' or 'from_document' are provided we will initialize the project as blank.
+	FromUrl *string `json:"from_url,omitempty"`
+
+	// IsbnNumber An optional ISBN number of the project you want to create, this will be added as metadata to the mp3 file on project / chapter download.
+	IsbnNumber *string `json:"isbn_number,omitempty"`
+
+	// Name The name of the project, used for identification only.
+	Name string `json:"name"`
+
+	// PronunciationDictionaryLocators A list of pronunciation dictionary locators (id, version_id) encoded as a list of JSON strings for pronunciation dictionaries to be applied to the text.  A list of json encoded strings is required as adding projects may occur through formData as opposed to jsonBody
+	PronunciationDictionaryLocators []string `json:"pronunciation_dictionary_locators"`
+
+	// QualityPreset Output quality of the generated audio. Must be one of:
+	// standard - standard output format, 128kbps with 44.1kHz sample rate.
+	// high - high quality output format, 192kbps with 44.1kHz sample rate and major improvements on our side. Using this setting increases the character cost by 20%.
+	// ultra - ultra quality output format, 192kbps with 44.1kHz sample rate and highest improvements on our side. Using this setting increases the character cost by 50%.
+	QualityPreset *string `json:"quality_preset,omitempty"`
+
+	// Title An optional name of the author of the project, this will be added as metadata to the mp3 file on project / chapter download.
+	Title *string `json:"title,omitempty"`
 }
 
 // BodyAddVoiceV1VoicesAddPost defines model for Body_Add_voice_v1_voices_add_post.
@@ -86,6 +198,42 @@ type BodyAddVoiceV1VoicesAddPost struct {
 
 	// Name The name that identifies this voice. This will be displayed in the dropdown of the website.
 	Name string `json:"name"`
+}
+
+// BodyCreatesAudioNativeEnabledProjectV1AudioNativePost defines model for Body_Creates_AudioNative_enabled_project__v1_audio_native_post.
+type BodyCreatesAudioNativeEnabledProjectV1AudioNativePost struct {
+	// Author Author used in the player. If not provided, default author set in the Player settings is used.
+	Author *string `json:"author,omitempty"`
+
+	// AutoConvert Whether to auto convert the project to audio or not.
+	AutoConvert *bool `json:"auto_convert,omitempty"`
+
+	// BackgroundColor Background color used in the player. If not provided, default background color set in the Player settings is used.
+	BackgroundColor *string `json:"background_color,omitempty"`
+
+	// File HTML input file with a specific format.
+	File openapi_types.File `json:"file"`
+
+	// Image Image URL used in the player. If not provided, default image set in the Player settings is used.
+	Image *string `json:"image,omitempty"`
+
+	// ModelId TTS Model ID used in the player. If not provided, default model ID set in the Player settings is used.
+	ModelId *string `json:"model_id,omitempty"`
+
+	// Name Project name.
+	Name string `json:"name"`
+
+	// Sessionization Specifies for how many minutes to persist the session across page reloads. If not provided, default sessionization set in the Player settings is used.
+	Sessionization *int `json:"sessionization,omitempty"`
+
+	// Small Whether to use small player or not. If not provided, default value set in the Player settings is used.
+	Small *bool `json:"small,omitempty"`
+
+	// TextColor Text color used in the player. If not provided, default text color set in the Player settings is used.
+	TextColor *string `json:"text_color,omitempty"`
+
+	// VoiceId Voice ID used to voice the content. If not provided, default voice ID set in the Player settings is used.
+	VoiceId *string `json:"voice_id,omitempty"`
 }
 
 // BodyDownloadHistoryItemsV1HistoryDownloadPost defines model for Body_Download_history_items_v1_history_download_post.
@@ -111,26 +259,68 @@ type BodyEditVoiceV1VoicesVoiceIdEditPost struct {
 
 // BodyTextToSpeechV1TextToSpeechVoiceIdPost defines model for Body_Text_to_speech_v1_text_to_speech__voice_id__post.
 type BodyTextToSpeechV1TextToSpeechVoiceIdPost struct {
-	// ModelId Identifier of the model that will be used, you can query them using GET /v1/models.
+	// ModelId Identifier of the model that will be used, you can query them using GET /v1/models. The model needs to have support for text to speech, you can check this using the can_do_text_to_speech property.
 	ModelId *string `json:"model_id,omitempty"`
 
 	// Text The text that will get converted into speech.
 	Text string `json:"text"`
 
-	// VoiceSettings Voice settings overriding stored setttings for the given voice. They are applied only on the given TTS request.
+	// VoiceSettings Voice settings overriding stored setttings for the given voice. They are applied only on the given request.
 	VoiceSettings *VoiceSettingsResponseModel `json:"voice_settings,omitempty"`
 }
 
 // BodyTextToSpeechV1TextToSpeechVoiceIdStreamPost defines model for Body_Text_to_speech_v1_text_to_speech__voice_id__stream_post.
 type BodyTextToSpeechV1TextToSpeechVoiceIdStreamPost struct {
-	// ModelId Identifier of the model that will be used, you can query them using GET /v1/models.
+	// ModelId Identifier of the model that will be used, you can query them using GET /v1/models. The model needs to have support for text to speech, you can check this using the can_do_text_to_speech property.
 	ModelId *string `json:"model_id,omitempty"`
 
 	// Text The text that will get converted into speech.
 	Text string `json:"text"`
 
-	// VoiceSettings Voice settings overriding stored setttings for the given voice. They are applied only on the given TTS request.
+	// VoiceSettings Voice settings overriding stored setttings for the given voice. They are applied only on the given request.
 	VoiceSettings *VoiceSettingsResponseModel `json:"voice_settings,omitempty"`
+}
+
+// BodyUpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPost defines model for Body_Update_Pronunciation_Dictionaries_v1_projects__project_id__update_pronunciation_dictionaries_post.
+type BodyUpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPost struct {
+	// PronunciationDictionaryLocators A list of pronunciation dictionary locators (id, version_id) encoded as a list of JSON strings for pronunciation dictionaries to be applied to the text.  A list of json encoded strings is required as adding projects may occur through formData as opposed to jsonBody
+	PronunciationDictionaryLocators []PronunciationDictionaryVersionLocatorDBModel `json:"pronunciation_dictionary_locators"`
+}
+
+// ChapterResponseModel defines model for ChapterResponseModel.
+type ChapterResponseModel struct {
+	CanBeDownloaded        bool                           `json:"can_be_downloaded"`
+	ChapterId              string                         `json:"chapter_id"`
+	ConversionProgress     float32                        `json:"conversion_progress"`
+	LastConversionDateUnix int                            `json:"last_conversion_date_unix"`
+	Name                   string                         `json:"name"`
+	State                  ChapterResponseModelState      `json:"state"`
+	Statistics             ChapterStatisticsResponseModel `json:"statistics"`
+}
+
+// ChapterResponseModelState defines model for ChapterResponseModel.State.
+type ChapterResponseModelState string
+
+// ChapterSnapshotResponseModel defines model for ChapterSnapshotResponseModel.
+type ChapterSnapshotResponseModel struct {
+	ChapterId         string `json:"chapter_id"`
+	ChapterSnapshotId string `json:"chapter_snapshot_id"`
+	CreatedAtUnix     int    `json:"created_at_unix"`
+	Name              string `json:"name"`
+	ProjectId         string `json:"project_id"`
+}
+
+// ChapterSnapshotsResponseModel defines model for ChapterSnapshotsResponseModel.
+type ChapterSnapshotsResponseModel struct {
+	Snapshots []ChapterSnapshotResponseModel `json:"snapshots"`
+}
+
+// ChapterStatisticsResponseModel defines model for ChapterStatisticsResponseModel.
+type ChapterStatisticsResponseModel struct {
+	CharactersConverted   int `json:"characters_converted"`
+	CharactersUnconverted int `json:"characters_unconverted"`
+	ParagraphsConverted   int `json:"paragraphs_converted"`
+	ParagraphsUnconverted int `json:"paragraphs_unconverted"`
 }
 
 // ExtendedSubscriptionResponseModel defines model for ExtendedSubscriptionResponseModel.
@@ -144,11 +334,13 @@ type ExtendedSubscriptionResponseModel struct {
 	CharacterLimit                 int                                       `json:"character_limit"`
 	Currency                       ExtendedSubscriptionResponseModelCurrency `json:"currency"`
 	HasOpenInvoices                bool                                      `json:"has_open_invoices"`
+	MaxVoiceAddEdits               int                                       `json:"max_voice_add_edits"`
 	NextCharacterCountResetUnix    int                                       `json:"next_character_count_reset_unix"`
 	NextInvoice                    InvoiceResponseModel                      `json:"next_invoice"`
 	ProfessionalVoiceLimit         int                                       `json:"professional_voice_limit"`
 	Status                         ExtendedSubscriptionResponseModelStatus   `json:"status"`
 	Tier                           string                                    `json:"tier"`
+	VoiceAddEditCounter            int                                       `json:"voice_add_edit_counter"`
 	VoiceLimit                     int                                       `json:"voice_limit"`
 }
 
@@ -178,7 +370,6 @@ type FineTuningResponseModel struct {
 	Language                    string                                 `json:"language"`
 	ManualVerification          ManualVerificationResponseModel        `json:"manual_verification"`
 	ManualVerificationRequested bool                                   `json:"manual_verification_requested"`
-	ModelId                     string                                 `json:"model_id"`
 	SliceIds                    []string                               `json:"slice_ids"`
 	VerificationAttempts        []VerificationAttemptResponseModel     `json:"verification_attempts"`
 	VerificationAttemptsCount   int                                    `json:"verification_attempts_count"`
@@ -188,11 +379,30 @@ type FineTuningResponseModel struct {
 // FineTuningResponseModelFinetuningState defines model for FineTuningResponseModel.FinetuningState.
 type FineTuningResponseModelFinetuningState string
 
+// GetChaptersResponseModel defines model for GetChaptersResponseModel.
+type GetChaptersResponseModel struct {
+	Chapters []ChapterResponseModel `json:"chapters"`
+}
+
 // GetHistoryResponseModel defines model for GetHistoryResponseModel.
 type GetHistoryResponseModel struct {
 	HasMore           bool                       `json:"has_more"`
 	History           []HistoryItemResponseModel `json:"history"`
 	LastHistoryItemId string                     `json:"last_history_item_id"`
+}
+
+// GetProjectsResponseModel defines model for GetProjectsResponseModel.
+type GetProjectsResponseModel struct {
+	Projects []ProjectResponseModel `json:"projects"`
+}
+
+// GetPronunciationDictionaryMetadataResponseModel defines model for GetPronunciationDictionaryMetadataResponseModel.
+type GetPronunciationDictionaryMetadataResponseModel struct {
+	CreatedBy        string  `json:"created_by"`
+	CreationTimeUnix int     `json:"creation_time_unix"`
+	Description      *string `json:"description,omitempty"`
+	Id               string  `json:"id"`
+	Name             string  `json:"name"`
 }
 
 // GetVoicesResponseModel defines model for GetVoicesResponseModel.
@@ -207,22 +417,27 @@ type HTTPValidationError struct {
 
 // HistoryItemResponseModel defines model for HistoryItemResponseModel.
 type HistoryItemResponseModel struct {
-	CharacterCountChangeFrom int                           `json:"character_count_change_from"`
-	CharacterCountChangeTo   int                           `json:"character_count_change_to"`
-	ContentType              string                        `json:"content_type"`
-	DateUnix                 int                           `json:"date_unix"`
-	Feedback                 FeedbackResponseModel         `json:"feedback"`
-	HistoryItemId            string                        `json:"history_item_id"`
-	RequestId                string                        `json:"request_id"`
-	Settings                 map[string]interface{}        `json:"settings"`
-	State                    HistoryItemResponseModelState `json:"state"`
-	Text                     string                        `json:"text"`
-	VoiceId                  string                        `json:"voice_id"`
-	VoiceName                string                        `json:"voice_name"`
+	CharacterCountChangeFrom int                                   `json:"character_count_change_from"`
+	CharacterCountChangeTo   int                                   `json:"character_count_change_to"`
+	ContentType              string                                `json:"content_type"`
+	DateUnix                 int                                   `json:"date_unix"`
+	Feedback                 FeedbackResponseModel                 `json:"feedback"`
+	HistoryItemId            string                                `json:"history_item_id"`
+	ModelId                  string                                `json:"model_id"`
+	RequestId                string                                `json:"request_id"`
+	Settings                 map[string]interface{}                `json:"settings"`
+	State                    HistoryItemResponseModelState         `json:"state"`
+	Text                     string                                `json:"text"`
+	VoiceCategory            HistoryItemResponseModelVoiceCategory `json:"voice_category"`
+	VoiceId                  string                                `json:"voice_id"`
+	VoiceName                string                                `json:"voice_name"`
 }
 
 // HistoryItemResponseModelState defines model for HistoryItemResponseModel.State.
 type HistoryItemResponseModelState string
+
+// HistoryItemResponseModelVoiceCategory defines model for HistoryItemResponseModel.VoiceCategory.
+type HistoryItemResponseModelVoiceCategory string
 
 // InvoiceResponseModel defines model for InvoiceResponseModel.
 type InvoiceResponseModel struct {
@@ -270,6 +485,62 @@ type ModelResponseModel struct {
 	TokenCostFactor                    float32                 `json:"token_cost_factor"`
 }
 
+// ProjectExtendedResponseModel defines model for ProjectExtendedResponseModel.
+type ProjectExtendedResponseModel struct {
+	CanBeDownloaded         bool                              `json:"can_be_downloaded"`
+	Chapters                []ChapterResponseModel            `json:"chapters"`
+	CreateDateUnix          int                               `json:"create_date_unix"`
+	DefaultModelId          string                            `json:"default_model_id"`
+	DefaultParagraphVoiceId string                            `json:"default_paragraph_voice_id"`
+	DefaultTitleVoiceId     string                            `json:"default_title_voice_id"`
+	LastConversionDateUnix  int                               `json:"last_conversion_date_unix"`
+	Name                    string                            `json:"name"`
+	ProjectId               string                            `json:"project_id"`
+	State                   ProjectExtendedResponseModelState `json:"state"`
+}
+
+// ProjectExtendedResponseModelState defines model for ProjectExtendedResponseModel.State.
+type ProjectExtendedResponseModelState string
+
+// ProjectResponseModel defines model for ProjectResponseModel.
+type ProjectResponseModel struct {
+	AcxVolumeNormalization  bool                      `json:"acx_volume_normalization"`
+	Author                  string                    `json:"author"`
+	CanBeDownloaded         bool                      `json:"can_be_downloaded"`
+	CreateDateUnix          int                       `json:"create_date_unix"`
+	DefaultModelId          string                    `json:"default_model_id"`
+	DefaultParagraphVoiceId string                    `json:"default_paragraph_voice_id"`
+	DefaultTitleVoiceId     string                    `json:"default_title_voice_id"`
+	IsbnNumber              string                    `json:"isbn_number"`
+	LastConversionDateUnix  int                       `json:"last_conversion_date_unix"`
+	Name                    string                    `json:"name"`
+	ProjectId               string                    `json:"project_id"`
+	State                   ProjectResponseModelState `json:"state"`
+	Title                   string                    `json:"title"`
+}
+
+// ProjectResponseModelState defines model for ProjectResponseModel.State.
+type ProjectResponseModelState string
+
+// ProjectSnapshotResponseModel defines model for ProjectSnapshotResponseModel.
+type ProjectSnapshotResponseModel struct {
+	CreatedAtUnix     int    `json:"created_at_unix"`
+	Name              string `json:"name"`
+	ProjectId         string `json:"project_id"`
+	ProjectSnapshotId string `json:"project_snapshot_id"`
+}
+
+// ProjectSnapshotsResponseModel defines model for ProjectSnapshotsResponseModel.
+type ProjectSnapshotsResponseModel struct {
+	Snapshots []ProjectSnapshotResponseModel `json:"snapshots"`
+}
+
+// PronunciationDictionaryVersionLocatorDBModel defines model for PronunciationDictionaryVersionLocatorDBModel.
+type PronunciationDictionaryVersionLocatorDBModel struct {
+	PronunciationDictionaryId string `json:"pronunciation_dictionary_id"`
+	VersionId                 string `json:"version_id"`
+}
+
 // RecordingResponseModel defines model for RecordingResponseModel.
 type RecordingResponseModel struct {
 	MimeType       string `json:"mime_type"`
@@ -298,10 +569,12 @@ type SubscriptionResponseModel struct {
 	CharacterCount                 int                               `json:"character_count"`
 	CharacterLimit                 int                               `json:"character_limit"`
 	Currency                       SubscriptionResponseModelCurrency `json:"currency"`
+	MaxVoiceAddEdits               int                               `json:"max_voice_add_edits"`
 	NextCharacterCountResetUnix    int                               `json:"next_character_count_reset_unix"`
 	ProfessionalVoiceLimit         int                               `json:"professional_voice_limit"`
 	Status                         SubscriptionResponseModelStatus   `json:"status"`
 	Tier                           string                            `json:"tier"`
+	VoiceAddEditCounter            int                               `json:"voice_add_edit_counter"`
 	VoiceLimit                     int                               `json:"voice_limit"`
 }
 
@@ -349,17 +622,18 @@ type VerificationAttemptResponseModel struct {
 
 // VoiceResponseModel defines model for VoiceResponseModel.
 type VoiceResponseModel struct {
-	AvailableForTiers []string                   `json:"available_for_tiers"`
-	Category          string                     `json:"category"`
-	Description       string                     `json:"description"`
-	FineTuning        FineTuningResponseModel    `json:"fine_tuning"`
-	Labels            map[string]string          `json:"labels"`
-	Name              string                     `json:"name"`
-	PreviewUrl        string                     `json:"preview_url"`
-	Samples           []SampleResponseModel      `json:"samples"`
-	Settings          VoiceSettingsResponseModel `json:"settings"`
-	Sharing           VoiceSharingResponseModel  `json:"sharing"`
-	VoiceId           string                     `json:"voice_id"`
+	AvailableForTiers       []string                   `json:"available_for_tiers"`
+	Category                string                     `json:"category"`
+	Description             string                     `json:"description"`
+	FineTuning              FineTuningResponseModel    `json:"fine_tuning"`
+	HighQualityBaseModelIds []string                   `json:"high_quality_base_model_ids"`
+	Labels                  map[string]string          `json:"labels"`
+	Name                    string                     `json:"name"`
+	PreviewUrl              string                     `json:"preview_url"`
+	Samples                 []SampleResponseModel      `json:"samples"`
+	Settings                VoiceSettingsResponseModel `json:"settings"`
+	Sharing                 VoiceSharingResponseModel  `json:"sharing"`
+	VoiceId                 string                     `json:"voice_id"`
 }
 
 // VoiceSettingsResponseModel defines model for VoiceSettingsResponseModel.
@@ -372,18 +646,32 @@ type VoiceSettingsResponseModel struct {
 
 // VoiceSharingResponseModel defines model for VoiceSharingResponseModel.
 type VoiceSharingResponseModel struct {
-	ClonedByCount       int                             `json:"cloned_by_count"`
-	EnabledInLibrary    bool                            `json:"enabled_in_library"`
-	HistoryItemSampleId string                          `json:"history_item_sample_id"`
-	LikedByCount        int                             `json:"liked_by_count"`
-	OriginalVoiceId     string                          `json:"original_voice_id"`
-	PublicOwnerId       string                          `json:"public_owner_id"`
-	Status              VoiceSharingResponseModelStatus `json:"status"`
-	WhitelistedEmails   []string                        `json:"whitelisted_emails"`
+	ClonedByCount       int                                   `json:"cloned_by_count"`
+	Description         string                                `json:"description"`
+	EnabledInLibrary    bool                                  `json:"enabled_in_library"`
+	HistoryItemSampleId string                                `json:"history_item_sample_id"`
+	Labels              map[string]string                     `json:"labels"`
+	LikedByCount        int                                   `json:"liked_by_count"`
+	Name                string                                `json:"name"`
+	OriginalVoiceId     string                                `json:"original_voice_id"`
+	PublicOwnerId       string                                `json:"public_owner_id"`
+	ReviewMessage       string                                `json:"review_message"`
+	ReviewStatus        VoiceSharingResponseModelReviewStatus `json:"review_status"`
+	Status              VoiceSharingResponseModelStatus       `json:"status"`
+	WhitelistedEmails   []string                              `json:"whitelisted_emails"`
 }
+
+// VoiceSharingResponseModelReviewStatus defines model for VoiceSharingResponseModel.ReviewStatus.
+type VoiceSharingResponseModelReviewStatus string
 
 // VoiceSharingResponseModelStatus defines model for VoiceSharingResponseModel.Status.
 type VoiceSharingResponseModelStatus string
+
+// CreatesAudioNativeEnabledProjectV1AudioNativePostParams defines parameters for CreatesAudioNativeEnabledProjectV1AudioNativePost.
+type CreatesAudioNativeEnabledProjectV1AudioNativePostParams struct {
+	// XiApiKey Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.
+	XiApiKey *string `json:"xi-api-key,omitempty"`
+}
 
 // GetGeneratedItemsV1HistoryGetParams defines parameters for GetGeneratedItemsV1HistoryGet.
 type GetGeneratedItemsV1HistoryGetParams struct {
@@ -427,6 +715,102 @@ type GetModelsV1ModelsGetParams struct {
 	XiApiKey *string `json:"xi-api-key,omitempty"`
 }
 
+// GetProjectsV1ProjectsGetParams defines parameters for GetProjectsV1ProjectsGet.
+type GetProjectsV1ProjectsGetParams struct {
+	// XiApiKey Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.
+	XiApiKey *string `json:"xi-api-key,omitempty"`
+}
+
+// AddProjectV1ProjectsAddPostParams defines parameters for AddProjectV1ProjectsAddPost.
+type AddProjectV1ProjectsAddPostParams struct {
+	// XiApiKey Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.
+	XiApiKey *string `json:"xi-api-key,omitempty"`
+}
+
+// DeleteProjectV1ProjectsProjectIdDeleteParams defines parameters for DeleteProjectV1ProjectsProjectIdDelete.
+type DeleteProjectV1ProjectsProjectIdDeleteParams struct {
+	// XiApiKey Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.
+	XiApiKey *string `json:"xi-api-key,omitempty"`
+}
+
+// GetProjectByIDV1ProjectsProjectIdGetParams defines parameters for GetProjectByIDV1ProjectsProjectIdGet.
+type GetProjectByIDV1ProjectsProjectIdGetParams struct {
+	// XiApiKey Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.
+	XiApiKey *string `json:"xi-api-key,omitempty"`
+}
+
+// GetChaptersV1ProjectsProjectIdChaptersGetParams defines parameters for GetChaptersV1ProjectsProjectIdChaptersGet.
+type GetChaptersV1ProjectsProjectIdChaptersGetParams struct {
+	// XiApiKey Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.
+	XiApiKey *string `json:"xi-api-key,omitempty"`
+}
+
+// DeleteChapterV1ProjectsProjectIdChaptersChapterIdDeleteParams defines parameters for DeleteChapterV1ProjectsProjectIdChaptersChapterIdDelete.
+type DeleteChapterV1ProjectsProjectIdChaptersChapterIdDeleteParams struct {
+	// XiApiKey Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.
+	XiApiKey *string `json:"xi-api-key,omitempty"`
+}
+
+// GetChapterByIDV1ProjectsProjectIdChaptersChapterIdGetParams defines parameters for GetChapterByIDV1ProjectsProjectIdChaptersChapterIdGet.
+type GetChapterByIDV1ProjectsProjectIdChaptersChapterIdGetParams struct {
+	// XiApiKey Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.
+	XiApiKey *string `json:"xi-api-key,omitempty"`
+}
+
+// ConvertChapterV1ProjectsProjectIdChaptersChapterIdConvertPostParams defines parameters for ConvertChapterV1ProjectsProjectIdChaptersChapterIdConvertPost.
+type ConvertChapterV1ProjectsProjectIdChaptersChapterIdConvertPostParams struct {
+	// XiApiKey Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.
+	XiApiKey *string `json:"xi-api-key,omitempty"`
+}
+
+// GetChapterSnapshotsV1ProjectsProjectIdChaptersChapterIdSnapshotsGetParams defines parameters for GetChapterSnapshotsV1ProjectsProjectIdChaptersChapterIdSnapshotsGet.
+type GetChapterSnapshotsV1ProjectsProjectIdChaptersChapterIdSnapshotsGetParams struct {
+	// XiApiKey Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.
+	XiApiKey *string `json:"xi-api-key,omitempty"`
+}
+
+// StreamChapterAudioV1ProjectsProjectIdChaptersChapterIdSnapshotsChapterSnapshotIdStreamPostParams defines parameters for StreamChapterAudioV1ProjectsProjectIdChaptersChapterIdSnapshotsChapterSnapshotIdStreamPost.
+type StreamChapterAudioV1ProjectsProjectIdChaptersChapterIdSnapshotsChapterSnapshotIdStreamPostParams struct {
+	// XiApiKey Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.
+	XiApiKey *string `json:"xi-api-key,omitempty"`
+}
+
+// ConvertProjectV1ProjectsProjectIdConvertPostParams defines parameters for ConvertProjectV1ProjectsProjectIdConvertPost.
+type ConvertProjectV1ProjectsProjectIdConvertPostParams struct {
+	// XiApiKey Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.
+	XiApiKey *string `json:"xi-api-key,omitempty"`
+}
+
+// GetProjectSnapshotsV1ProjectsProjectIdSnapshotsGetParams defines parameters for GetProjectSnapshotsV1ProjectsProjectIdSnapshotsGet.
+type GetProjectSnapshotsV1ProjectsProjectIdSnapshotsGetParams struct {
+	// XiApiKey Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.
+	XiApiKey *string `json:"xi-api-key,omitempty"`
+}
+
+// StreamProjectAudioV1ProjectsProjectIdSnapshotsProjectSnapshotIdStreamPostParams defines parameters for StreamProjectAudioV1ProjectsProjectIdSnapshotsProjectSnapshotIdStreamPost.
+type StreamProjectAudioV1ProjectsProjectIdSnapshotsProjectSnapshotIdStreamPostParams struct {
+	// XiApiKey Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.
+	XiApiKey *string `json:"xi-api-key,omitempty"`
+}
+
+// UpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPostParams defines parameters for UpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPost.
+type UpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPostParams struct {
+	// XiApiKey Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.
+	XiApiKey *string `json:"xi-api-key,omitempty"`
+}
+
+// AddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePostParams defines parameters for AddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePost.
+type AddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePostParams struct {
+	// XiApiKey Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.
+	XiApiKey *string `json:"xi-api-key,omitempty"`
+}
+
+// GetMetadataForAPronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdGetParams defines parameters for GetMetadataForAPronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdGet.
+type GetMetadataForAPronunciationDictionaryV1PronunciationDictionariesPronunciationDictionaryIdGetParams struct {
+	// XiApiKey Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.
+	XiApiKey *string `json:"xi-api-key,omitempty"`
+}
+
 // TextToSpeechV1TextToSpeechVoiceIdPostParams defines parameters for TextToSpeechV1TextToSpeechVoiceIdPost.
 type TextToSpeechV1TextToSpeechVoiceIdPostParams struct {
 	// OptimizeStreamingLatency You can turn on latency optimizations at some cost of quality. The best possible final latency varies by model. Possible values:
@@ -435,7 +819,22 @@ type TextToSpeechV1TextToSpeechVoiceIdPostParams struct {
 	// 2 - strong latency optimizations (about 75% of possible latency improvement of option 3)
 	// 3 - max latency optimizations
 	// 4 - max latency optimizations, but also with text normalizer turned off for even more latency savings (best latency, but can mispronounce eg numbers and dates).
+	//
+	// Defaults to 0.
 	OptimizeStreamingLatency *int `form:"optimize_streaming_latency,omitempty" json:"optimize_streaming_latency,omitempty"`
+
+	// OutputFormat Output format of the generated audio. Must be one of:
+	// mp3_44100_32 - output format, mp3 with 44.1kHz sample rate at 32kbps.
+	// mp3_44100_64 - output format, mp3 with 44.1kHz sample rate at 64kbps.
+	// mp3_44100_96 - output format, mp3 with 44.1kHz sample rate at 96kbps.
+	// mp3_44100_128 - default output format, mp3 with 44.1kHz sample rate at 128kbps.
+	// mp3_44100_192 - output format, mp3 with 44.1kHz sample rate at 192kbps. Requires you to be subscribed to Creator tier or above.
+	// pcm_16000 - PCM format (S16LE) with 16kHz sample rate.
+	// pcm_22050 - PCM format (S16LE) with 22.05kHz sample rate.
+	// pcm_24000 - PCM format (S16LE) with 24kHz sample rate.
+	// pcm_44100 - PCM format (S16LE) with 44.1kHz sample rate. Requires you to be subscribed to Independent Publisher tier or above.
+	// ulaw_8000 - μ-law format (sometimes written mu-law, often approximated as u-law) with 8kHz sample rate. Note that this format is commonly used for Twilio audio inputs.
+	OutputFormat *string `form:"output_format,omitempty" json:"output_format,omitempty"`
 
 	// XiApiKey Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.
 	XiApiKey *string `json:"xi-api-key,omitempty"`
@@ -449,7 +848,22 @@ type TextToSpeechV1TextToSpeechVoiceIdStreamPostParams struct {
 	// 2 - strong latency optimizations (about 75% of possible latency improvement of option 3)
 	// 3 - max latency optimizations
 	// 4 - max latency optimizations, but also with text normalizer turned off for even more latency savings (best latency, but can mispronounce eg numbers and dates).
+	//
+	// Defaults to 0.
 	OptimizeStreamingLatency *int `form:"optimize_streaming_latency,omitempty" json:"optimize_streaming_latency,omitempty"`
+
+	// OutputFormat Output format of the generated audio. Must be one of:
+	// mp3_44100_32 - output format, mp3 with 44.1kHz sample rate at 32kbps.
+	// mp3_44100_64 - output format, mp3 with 44.1kHz sample rate at 64kbps.
+	// mp3_44100_96 - output format, mp3 with 44.1kHz sample rate at 96kbps.
+	// mp3_44100_128 - default output format, mp3 with 44.1kHz sample rate at 128kbps.
+	// mp3_44100_192 - output format, mp3 with 44.1kHz sample rate at 192kbps. Requires you to be subscribed to Creator tier or above.
+	// pcm_16000 - PCM format (S16LE) with 16kHz sample rate.
+	// pcm_22050 - PCM format (S16LE) with 22.05kHz sample rate.
+	// pcm_24000 - PCM format (S16LE) with 24kHz sample rate.
+	// pcm_44100 - PCM format (S16LE) with 44.1kHz sample rate. Requires you to be subscribed to Independent Publisher tier or above.
+	// ulaw_8000 - μ-law format (sometimes written mu-law, often approximated as u-law) with 8kHz sample rate. Note that this format is commonly used for Twilio audio inputs.
+	OutputFormat *string `form:"output_format,omitempty" json:"output_format,omitempty"`
 
 	// XiApiKey Your API key. This is required by most endpoints to access our API programatically. You can view your xi-api-key using the 'Profile' tab on the website.
 	XiApiKey *string `json:"xi-api-key,omitempty"`
@@ -527,8 +941,20 @@ type EditVoiceSettingsV1VoicesVoiceIdSettingsEditPostParams struct {
 	XiApiKey *string `json:"xi-api-key,omitempty"`
 }
 
+// CreatesAudioNativeEnabledProjectV1AudioNativePostMultipartRequestBody defines body for CreatesAudioNativeEnabledProjectV1AudioNativePost for multipart/form-data ContentType.
+type CreatesAudioNativeEnabledProjectV1AudioNativePostMultipartRequestBody = BodyCreatesAudioNativeEnabledProjectV1AudioNativePost
+
 // DownloadHistoryItemsV1HistoryDownloadPostJSONRequestBody defines body for DownloadHistoryItemsV1HistoryDownloadPost for application/json ContentType.
 type DownloadHistoryItemsV1HistoryDownloadPostJSONRequestBody = BodyDownloadHistoryItemsV1HistoryDownloadPost
+
+// AddProjectV1ProjectsAddPostMultipartRequestBody defines body for AddProjectV1ProjectsAddPost for multipart/form-data ContentType.
+type AddProjectV1ProjectsAddPostMultipartRequestBody = BodyAddProjectV1ProjectsAddPost
+
+// UpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPostJSONRequestBody defines body for UpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPost for application/json ContentType.
+type UpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPostJSONRequestBody = BodyUpdatePronunciationDictionariesV1ProjectsProjectIdUpdatePronunciationDictionariesPost
+
+// AddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePostMultipartRequestBody defines body for AddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePost for multipart/form-data ContentType.
+type AddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePostMultipartRequestBody = BodyAddAPronunciationDictionaryV1PronunciationDictionariesAddFromFilePost
 
 // TextToSpeechV1TextToSpeechVoiceIdPostJSONRequestBody defines body for TextToSpeechV1TextToSpeechVoiceIdPost for application/json ContentType.
 type TextToSpeechV1TextToSpeechVoiceIdPostJSONRequestBody = BodyTextToSpeechV1TextToSpeechVoiceIdPost
